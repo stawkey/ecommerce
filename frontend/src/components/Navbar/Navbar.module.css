@@ -1,0 +1,112 @@
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    background-color: #fff;
+    position: relative;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 60px;
+}
+
+.leftSection {
+    justify-self: start;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.categoriesWrapper {
+    margin: 0 35px 0 35px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.categoriesBtn {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+}
+
+.categoriesMenu {
+    position: absolute;
+    top: 60px;
+    background-color: #fff;
+    border: #000 solid 3px;
+    border-radius: 0.5rem;
+    padding: 8px;
+}
+
+.categoriesMenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.categoriesMenu li {
+    padding: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.categoriesMenu li:hover {
+    background-color: #f0f0f0;
+}
+
+.logo {
+    font-size: 2.5rem;
+    height: 50px;
+    font-family: "Merriweather", serif;
+    font-weight: bold;
+    color: #000;
+}
+
+.searchBar {
+    display: flex;
+    justify-self: center;
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.searchBar input {
+    flex: 1;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 8px;
+}
+
+.searchBar button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.icons {
+    justify-self: end;
+    display: flex;
+    font-size: 2rem;
+    gap: 25px;
+    padding: 0 35px;
+}
+
+.icon {
+    color: #000;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.icon:hover,
+.categoriesBtn:hover {
+    background-color: #f0f0f0;
+    border-radius: 0.5rem;
+}
