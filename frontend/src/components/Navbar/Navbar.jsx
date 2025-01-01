@@ -54,7 +54,9 @@ const Navbar = () => {
                 </button>
             </div>
             <div className={styles.icons}>
-                <FontAwesomeIcon icon={faUser} className={styles.icon} />
+                <Link to="/login">
+                    <FontAwesomeIcon icon={faUser} className={styles.icon} />
+                </Link>
                 <FontAwesomeIcon icon={faCartShopping} className={styles.icon} />
             </div>
         </nav>
