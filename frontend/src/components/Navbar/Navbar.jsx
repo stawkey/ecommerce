@@ -57,7 +57,9 @@ const Navbar = () => {
                 <Link to="/login">
                     <FontAwesomeIcon icon={faUser} className={styles.icon} />
                 </Link>
-                <FontAwesomeIcon icon={faCartShopping} className={styles.icon} />
+                <Link to="/profile">
+                    <FontAwesomeIcon icon={faCartShopping} className={styles.icon} />
+                </Link>
             </div>
         </nav>
     );
