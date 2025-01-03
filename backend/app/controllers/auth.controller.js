@@ -4,11 +4,6 @@ const User = db.user;
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const crypto = require("crypto");
-
-function generateCSRFToken() {
-    return crypto.randomBytes(32).toString("hex");
-}
 
 exports.createUser = async (req, res) => {
     try {
@@ -42,30 +37,24 @@ exports.authenticateUser = async (req, res) => {
 
         const accessToken = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
             algorithm: "HS256",
-            expiresIn: "1h",
+            expiresIn: "15m",
         });
 
         const refreshToken = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
             algorithm: "HS256",
-            expiresIn: "7d",
-        });
-
-        res.cookie("refresh_token", refreshToken, {
-            httpOnly: true,
-            sameSite: "Strict",
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            expiresIn: "30d",
         });
 
         res.cookie("access_token", accessToken, {
             httpOnly: true,
             sameSite: "Strict",
-            maxAge: 1 * 60 * 60 * 1000, // 1 hour
+            maxAge: 15 * 60 * 1000, // 15 minutes
         });
 
-        const csrfToken = generateCSRFToken();
-        res.cookie("csrf_token", csrfToken, {
+        res.cookie("refresh_token", refreshToken, {
             httpOnly: true,
             sameSite: "Strict",
+            maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         });
 
         res.status(200).json({ message: "Success!" });
@@ -89,24 +78,24 @@ exports.refresh = async (req, res) => {
 
             const accessToken = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
                 algorithm: "HS256",
-                expiresIn: "1h",
+                expiresIn: "15m",
             });
 
             const newRefreshToken = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
                 algorithm: "HS256",
-                expiresIn: "7d",
-            });
-
-            res.cookie("refresh_token", newRefreshToken, {
-                httpOnly: true,
-                sameSite: "Strict",
-                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+                expiresIn: "30d",
             });
 
             res.cookie("access_token", accessToken, {
                 httpOnly: true,
                 sameSite: "Strict",
-                maxAge: 1 * 60 * 60 * 1000, // 1 hour
+                maxAge: 15 * 60 * 1000, // 15 minutes
+            });
+
+            res.cookie("refresh_token", newRefreshToken, {
+                httpOnly: true,
+                sameSite: "Strict",
+                maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
             });
 
             res.status(200).json({ message: "Tokens refreshed successfully" });
@@ -120,7 +109,6 @@ exports.logout = (req, res) => {
     try {
         res.clearCookie("refresh_token", { httpOnly: true, sameSite: "Strict" });
         res.clearCookie("access_token", { httpOnly: true, sameSite: "Strict" });
-        res.clearCookie("csrf_token", { httpOnly: true, sameSite: "Strict" });
 
         res.status(200).json({ message: "User logged out successfully" });
     } catch (err) {

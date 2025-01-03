@@ -3,6 +3,7 @@ import styles from "./Register.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import api from "../../utils/api";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -17,23 +18,24 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch("http://localhost:8000/api/auth/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
+        const response = await api.post(
+            "/auth/register",
+            {
+                firstName,
+                lastName,
+                email,
                 password,
-            }),
-        });
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
 
-        const data = await response.json();
-        setMessage(data.message);
+        setMessage(response.data.message);
 
-        if (response.ok) {
+        if (response.status === 201) {
             navigate("/login");
         }
 

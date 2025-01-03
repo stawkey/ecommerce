@@ -3,6 +3,7 @@ import styles from "./Login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import api from "../../utils/api";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -15,19 +16,20 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch("http://localhost:8000/api/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email: email, password }),
-        });
+        try {
+            const response = await api.post(
+                "/auth/login",
+                { email, password },
+                { headers: { "Content-Type": "application/json" } }
+            );
 
-        const data = await response.json();
-        setMessage(data.message);
+            setMessage(response.data.message);
 
-        if (response.ok) {
-            navigate("/");
+            if (response.status === 200) {
+                navigate("/");
+            }
+        } catch (error) {
+            setMessage(error.response?.data?.message || "Login failed");
         }
 
         setShowMessage(true);
