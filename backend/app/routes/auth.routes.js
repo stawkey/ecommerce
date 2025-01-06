@@ -11,5 +11,6 @@ router.post("/logout", authController.logout);
 router.get("/is-authenticated", authenticateJwtMiddleware, (req, res) => {
     res.status(200).json({ message: "Authenticated" });
 });
+router.get("/getUserProfile", authenticateJwtMiddleware, authController.getUserProfile);
 
 module.exports = router;

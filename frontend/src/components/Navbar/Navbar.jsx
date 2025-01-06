@@ -54,10 +54,10 @@ const Navbar = () => {
                 </button>
             </div>
             <div className={styles.icons}>
-                <Link to="/login">
+                <Link to="/profile">
                     <FontAwesomeIcon icon={faUser} className={styles.icon} />
                 </Link>
-                <Link to="/profile">
+                <Link to="/">
                     <FontAwesomeIcon icon={faCartShopping} className={styles.icon} />
                 </Link>
             </div>
