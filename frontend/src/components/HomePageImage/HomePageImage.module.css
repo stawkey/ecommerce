@@ -3,7 +3,6 @@
     width: 100vw;
     height: 550px;
     margin: auto;
-    margin-top: 50px;
     overflow: hidden;
 }
 
@@ -13,7 +12,7 @@
     /* object-fit: cover; */
 }
 
-.rightArrow, 
+.rightArrow,
 .leftArrow {
     position: absolute;
     top: 50%;
@@ -26,10 +25,9 @@
     padding: 10px;
 }
 
-
-.rightArrow::after, 
+.rightArrow::after,
 .leftArrow::after {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     top: 50%;
@@ -40,15 +38,14 @@
     border: 2px solid black;
     border-radius: 50%;
     box-sizing: border-box;
-    z-index: -1; 
+    z-index: -1;
     background-color: #fff;
 }
 
-.rightArrow:hover::after, 
+.rightArrow:hover::after,
 .leftArrow:hover::after {
     background-color: #bbb;
 }
-
 
 .rightArrow {
     right: 20px;
@@ -57,4 +54,3 @@
 .leftArrow {
     left: 20px;
 }
-

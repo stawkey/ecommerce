@@ -1,0 +1,45 @@
+.profileHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.userInfo h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #000;
+}
+
+.userInfo p {
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0 0 0;
+}
+
+.logoutBtn {
+    padding: 15px 30px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #d9534f;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logoutBtn:hover {
+    background-color: #c9302c;
+}
