@@ -7,6 +7,7 @@ a:visited,
 a:link,
 a:active {
     text-decoration: none;
+    color: inherit;
 }
 
 img {
@@ -20,7 +21,7 @@ body {
 
 body {
     margin: 0;
-    background-color: #272727;
+    background-color: #1e1e1e;
     overflow-x: hidden;
     font-family: "Merriweather", serif;
 }

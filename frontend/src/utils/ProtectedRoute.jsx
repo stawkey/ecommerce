@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import api from "./api";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 
 const ProtectedRoute = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -24,7 +25,7 @@ const ProtectedRoute = ({ children }) => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <LoadingSpinner />;
     }
 
     return isAuthenticated ? children : <Navigate to="/login" replace />;

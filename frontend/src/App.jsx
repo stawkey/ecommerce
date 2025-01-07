@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import SearchPage from "./pages/SearchPage/SearchPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import globalRouter from "./utils/globalRouter";
 
@@ -14,6 +15,7 @@ const App = () => (
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/search" element={<SearchPage />} />
             <Route
                 path="/profile"
                 element={

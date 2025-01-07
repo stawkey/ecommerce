@@ -3,6 +3,7 @@ import styles from "./ProfilePage.module.css";
 import { Link } from "react-router-dom";
 import api from "../../utils/api";
 import Navbar from "../../components/Navbar/Navbar";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const handleLogout = () => {
     api.post("/auth/logout", {}, {});
@@ -20,7 +21,7 @@ const ProfilePage = () => {
     }, []);
 
     if (!userProfile) {
-        return <div>Loading...</div>;
+        return <LoadingSpinner />;
     }
 
     return (

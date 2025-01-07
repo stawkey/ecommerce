@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Use useNavigate for redirection
 import styles from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,14 +9,16 @@ import {
     faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Navbar = () => {
+const Navbar = ({ onSearch }) => {
     const [showCategories, setShowCategories] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+    const navigate = useNavigate();
 
     const handleSearch = (e) => {
         e.preventDefault();
-
-        console.log(`Searching for ${searchQuery}`);
+        if (searchQuery.trim()) {
+            navigate(`/search?q=${searchQuery}`);
+        }
     };
 
     return (
@@ -28,16 +30,23 @@ const Navbar = () => {
                     onMouseLeave={() => setShowCategories(false)}
                 >
                     {showCategories && <div className={styles.overlay}></div>}
-
                     <div className={styles.categoriesBtn}>
                         <FontAwesomeIcon icon={faBars} />
                         {showCategories && (
                             <div className={styles.categoriesMenu}>
                                 <ul>
-                                    <li>Category 1</li>
-                                    <li>Category 2</li>
-                                    <li>Category 3</li>
-                                    <li>Category 4</li>
+                                    <Link to="/search?q=men's clothing">
+                                        <li>Men's clothing</li>
+                                    </Link>
+                                    <Link to="/search?q=jewelery">
+                                        <li>Jewelery</li>
+                                    </Link>
+                                    <Link to="/search?q=electronics">
+                                        <li>Electronics</li>
+                                    </Link>
+                                    <Link to="/search?q=women's clothing">
+                                        <li>Women's clothing</li>
+                                    </Link>
                                 </ul>
                             </div>
                         )}
@@ -48,8 +57,13 @@ const Navbar = () => {
                 </Link>
             </div>
             <div className={styles.searchBar}>
-                <input type="text" placeholder="What are you looking for?" />
-                <button type="submit">
+                <input
+                    type="text"
+                    placeholder="What are you looking for?"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button type="submit" onClick={handleSearch}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
             </div>
