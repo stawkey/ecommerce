@@ -1,0 +1,28 @@
+.deliveryContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: flex-end; */
+    /* margin-top: 20px; */
+    width: 40vw;
+    height: 35rem;
+    background-color: #fff;
+    border: 5px solid #ccc;
+}
+
+h4 {
+    display: flex;
+    align-self: flex-start;
+    margin-left: 10%;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 80%;
+    height: 30px;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

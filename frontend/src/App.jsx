@@ -5,6 +5,8 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import SearchPage from "./pages/SearchPage/SearchPage";
+import Cart from "./pages/Cart/Cart";
+import SuccessfulOrderPage from "./pages/SuccessfulOrderPage/SuccessfulOrderPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import globalRouter from "./utils/globalRouter";
 
@@ -16,6 +18,12 @@ const App = () => (
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/success"
+                element={
+                    <ProtectedRoute>
+                        <SuccessfulOrderPage />
+                    </ProtectedRoute>} />
             <Route
                 path="/profile"
                 element={

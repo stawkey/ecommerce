@@ -71,7 +71,7 @@ const Navbar = ({ onSearch }) => {
                 <Link to="/profile">
                     <FontAwesomeIcon icon={faUser} className={styles.icon} />
                 </Link>
-                <Link to="/">
+                <Link to="/cart">
                     <FontAwesomeIcon icon={faCartShopping} className={styles.icon} />
                 </Link>
             </div>
