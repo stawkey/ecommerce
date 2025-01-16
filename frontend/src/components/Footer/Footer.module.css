@@ -1,0 +1,21 @@
+.footerContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 100vw;
+    height: 400px;
+    background-color: #fff;
+    border-top: #000 solid 5px;
+    bottom: 0;
+    left: 0;
+}
+
+.copyright {
+    align-self: flex-end;
+}
+
+.copyrightIcon {
+    color: #fff;
+    background-color: #000;
+    border: #000 1px solid;
+    border-radius: 20px;
+}

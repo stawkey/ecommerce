@@ -4,6 +4,7 @@ const axios = require("axios");
 require("dotenv").config();
 
 const authenticateJwt = async (req, res, next) => {
+    console.log("Middleware start")
     try {
         expressJwt({
             secret: process.env.SECRET_KEY,
@@ -30,6 +31,7 @@ const authenticateJwt = async (req, res, next) => {
                 }
                 return res.status(401).json({ message: "Invalid token" });
             }
+            // req.user = user;
             next();
         });
     } catch (err) {

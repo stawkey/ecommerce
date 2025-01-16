@@ -9,31 +9,34 @@ import Cart from "./pages/Cart/Cart";
 import SuccessfulOrderPage from "./pages/SuccessfulOrderPage/SuccessfulOrderPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import globalRouter from "./utils/globalRouter";
+import { CartProvider } from "./contexts/CartContext";
 
 const App = () => (
-    <BrowserRouter>
-        <SetupGlobalNavigate />
-        <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/success"
-                element={
-                    <ProtectedRoute>
-                        <SuccessfulOrderPage />
-                    </ProtectedRoute>} />
-            <Route
-                path="/profile"
-                element={
-                    <ProtectedRoute>
-                        <ProfilePage />
-                    </ProtectedRoute>
-                }
-            />
-        </Routes>
-    </BrowserRouter>
+    <CartProvider>
+        <BrowserRouter>
+            <SetupGlobalNavigate />
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/success"
+                    element={
+                        <ProtectedRoute>
+                            <SuccessfulOrderPage />
+                        </ProtectedRoute>} />
+                <Route
+                    path="/profile"
+                    element={
+                        <ProtectedRoute>
+                            <ProfilePage />
+                        </ProtectedRoute>
+                    }
+                />
+            </Routes>
+        </BrowserRouter>
+    </CartProvider>
 );
 
 const SetupGlobalNavigate = () => {

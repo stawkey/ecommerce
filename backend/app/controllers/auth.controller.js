@@ -24,6 +24,7 @@ exports.createUser = async (req, res) => {
 
 exports.authenticateUser = async (req, res) => {
     try {
+        console.log("działa?");
         const user = await User.findOne({ email: req.body.email });
 
         if (!user) {

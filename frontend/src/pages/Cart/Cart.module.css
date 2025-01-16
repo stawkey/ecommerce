@@ -4,9 +4,14 @@
 
 .cartContainer {
     width: 60vw;
-    height: 600px;
-    background-color: #999;
+    height: 53rem;
+    background-color: #fff;
+    border: 5px solid #ccc;
     display: flex;
+}
+
+.cartContainer h1 {
+    color: #000;
 }
 
 .deliveryForm {

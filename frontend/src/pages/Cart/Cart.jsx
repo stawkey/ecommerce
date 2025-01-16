@@ -4,26 +4,15 @@ import style from './Cart.module.css';
 import DeliveryForm from '../../components/DeliveryForm/DeliveryForm';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import api from "../../utils/api";
 import { Link } from "react-router-dom";
 
 
 
 
 const Cart = () => {
-
-
     const [shopping, setShopping] = useState(false);
     const handleShopping = () => setShopping(true);
-    const [userProfile, setUserProfile] = useState(null);
 
-    useEffect(() => {
-        const fetchProfile = async () => {
-            const response = await api.get("/auth/getUserProfile", { withCredentials: true });
-            setUserProfile(response.data);
-        };
-        fetchProfile();
-    }, []);
     return (
         <div>
             <Navbar />

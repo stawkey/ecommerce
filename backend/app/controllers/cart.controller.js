@@ -1,20 +1,39 @@
 const Cart = require("../models/cart.model");
+const User = db.user;
+
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
 
 exports.addItemToCart = async (req, res) => {
+    console.log("AAAAAA");
     try {
-        const { productId, name, price, image, quantity } = req.body;
+        console.log("req body: ", req.body);
+        const { productId, title, price, quantity } = req.body;
+        console.log("req body: ", req.body);
+        if (!productId || !title || !price || !quantity) {
+            return res.status(400).json({ error: "Invalid input data" });
+        }
+        if (!req.user || !req.user.id) {
+            return res.status(401).json({ error: "Unauthorized" });
+        }
         const userId = req.user.id;
 
         let cart = await Cart.findOne({ userId });
         if (!cart) {
             cart = new Cart({ userId, items: [] });
         }
-
-        const itemIndex = cart.items.findIndex(item => item.productId.toString() === productId);
-        if (itemIndex > -1) {
+        let itemIndex = 0
+        for (let i = 0; i < cart.items.length(); i++) {
+            if (cart.items[i].productId === productId) {
+                itemIndex = i;
+                break;
+            }
+        }
+        // const itemIndex = cart.items.findIndex(item => item.productId.toString() === productId);
+        if (itemIndex > 0) {
             cart.items[itemIndex].quantity += quantity;
         } else {
-            cart.items.push({ productId, name, price, image, quantity });
+            cart.items.push({ productId, title, price, quantity });
         }
 
         await cart.save();

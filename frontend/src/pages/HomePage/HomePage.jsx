@@ -5,6 +5,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import style from "./HomePage.module.css";
 import HomePageImage from "../../components/HomePageImage/HomePageImage";
 import ProductsHighlights from "../../components/ProductsHighlights/ProductsHighlights";
+import Footer from "../../components/Footer/Footer";
 const HomePage = () => {
     return (
         <div>
@@ -19,16 +20,16 @@ const HomePage = () => {
             <h1>Check our bestsellers:</h1>
             <div className={style.bestsellersBox}>
                 <div className={style.highlights}>
-                <ProductsHighlights />
+                    <ProductsHighlights />
                 </div>
             </div>
             <h1>New things in stock:</h1>
             <div className={style.newThingsBox}>
                 <div className={style.highlights}>
-                <ProductsHighlights />
+                    <ProductsHighlights />
                 </div>
             </div>
-            <h2>Contact, footer, anything? tbd</h2>
+            <Footer />
         </div>
     )
 

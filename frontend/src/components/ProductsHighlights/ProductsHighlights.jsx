@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import style from "./ProductsHighlights.module.css";
+import api from "../../utils/api";
+
 
 const ProductsHighlights = () => {
     const [products, setProducts] = useState([]);
@@ -7,47 +9,79 @@ const ProductsHighlights = () => {
 
     useEffect(() => {
         fetch("https://fakestoreapi.com/products")
-            .then((response) => response.json())
-            .then((data) => setProducts(data));
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to fetch products");
+                }
+                return response.json();
+            })
+            .then((data) => setProducts(data))
+            .catch((error) => console.error("Error fetching products:", error));
     }, []);
 
-    function handlingLeft() {
+    const handlingLeft = () => {
         setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? products.length - 1 : prevIndex - 1)
-    }
+            prevIndex === 0 ? products.length - 1 : prevIndex - 1
+        );
+    };
 
-    function handlingRight() {
+    const handlingRight = () => {
         setCurrentIndex((prevIndex) =>
-            prevIndex === products.length - 1 ? 0 : prevIndex + 1)
-    }
+            prevIndex === products.length - 1 ? 0 : prevIndex + 1
+        );
+    };
 
     const cuttingText = (text, maxLength) => {
         return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
     };
 
-    const elements = currentIndex === products.length - 1 ? [products[products.length - 1], products[0], products[1], products[2]]
-        : currentIndex === products.length - 2 ? [products[products.length - 2], products[products.length - 1], products[0], products[1]]
-            : currentIndex === products.length - 3 ? [products[products.length - 3], products[products.length - 2], products[products.length - 1], products[0]]
-                : products.slice(currentIndex, currentIndex + 4);
+    const elements = [
+        products[(currentIndex) % products.length],
+        products[(currentIndex + 1) % products.length],
+        products[(currentIndex + 2) % products.length],
+        products[(currentIndex + 3) % products.length],
+    ];
 
+
+    const handleAddToCart = async (event, product) => {
+        console.log('a')
+        // event.preventDefault();
+        console.log('a')
+        console.log(product.id, product.title, product.price)
+        try {
+            await api.post(
+                "/cart/add",
+                {
+                    productId: product.id,
+                    title: product.title,
+                    price: product.price,
+                    quantity: 1,
+                });
+            console.log("Added to cart");
+        } catch (error) {
+            console.log(" Failed to add to cart");
+        }
+
+    };
+
+    if (products.length === 0) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className={style.container}>
             <div className={style.items}>
-                {elements.map((product) => (
-                    <div key={product.id} className={style.productCard}>
+                {elements.map((product, index) => (
+                    <div key={product.id || index} className={style.productCard} onSubmit={handleAddToCart}>
                         <a href={`/product/${product.id}`}>
-                            <img
-                                src={product.image}
-                                alt={product.title}
-                            />
+                            <img src={product.image} alt={product.title} />
                             <h4>{cuttingText(product.title, 15)}</h4>
                             <p>{product.price} $</p>
-
                         </a>
-                        <button>&#128722; Add to cart</button>
+                        <button type="submit" onClick={(event) => handleAddToCart(event, product)}>
+                            &#128722; Add to cart
+                        </button>
                     </div>
-
                 ))}
             </div>
             <button className={style.leftArrow} onClick={handlingLeft}>
