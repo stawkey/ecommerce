@@ -39,7 +39,6 @@ const ProductsHighlights = () => {
     ];
 
     const handleAddToCart = async (event, product) => {
-        // event.preventDefault();
         try {
             await api.post("/cart/add", {
                 productId: product.id,

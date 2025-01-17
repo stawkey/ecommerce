@@ -5,19 +5,25 @@
 .cartContainer {
     width: 60vw;
     height: 53rem;
-    background-color: #fff;
+    /* background-color: #fff; */
     border: 5px solid #ccc;
     display: flex;
     flex-direction: column;
+    color: #fff;
 }
 
 .cartContainer h1 {
-    color: #000;
+    color: #fff;
     margin-left: 5%;
 }
 
 .cartContainer p {
+    color: #fff;
     margin-left: 5%;
+}
+
+.cartContainer li {
+    margin: 15px 0;
 }
 
 .cartImage {
@@ -37,9 +43,10 @@
     /* margin-top: 20px; */
     width: 40vw;
     height: 18rem;
-    background-color: #fff;
-    border: 5px solid #ccc;
+    /* background-color: #fff; */
+    border: 4px solid #ccc;
     border-top: none;
+    color: #fff;
 }
 
 .cartSummary ul {

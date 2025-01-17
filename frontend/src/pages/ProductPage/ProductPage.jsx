@@ -55,6 +55,19 @@ const ProductPage = () => {
             alert("Quantity must be at least 1");
             return;
         }
+        try {
+            await api.post(
+                "/cart/add",
+                {
+                    productId: product.id,
+                    title: product.title,
+                    price: product.price,
+                    image: product.image,
+                    quantity: quantity,
+                });
+            } catch (error) {
+                console.error("Error adding product to cart:", error);
+            }
     };
 
     const handleSubmitReview = async () => {

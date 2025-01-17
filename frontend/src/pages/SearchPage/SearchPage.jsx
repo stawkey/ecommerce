@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./SearchPage.module.css";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
@@ -53,6 +53,7 @@ const SearchPage = () => {
                         {filteredProducts.length > 0 ? (
                             filteredProducts.map((product) => (
                                 <div key={product.id} className={styles.productItem}>
+                                    <Link to={`/product/${product.id}`}>
                                     {!imagesLoading[product.id] && <LoadingSpinner />}
                                     <img
                                         src={product.image}
@@ -70,6 +71,7 @@ const SearchPage = () => {
                                             <span>({product.rating.count})</span>
                                         </div>
                                     </div>
+                                    </Link>
                                 </div>
                             ))
                         ) : (

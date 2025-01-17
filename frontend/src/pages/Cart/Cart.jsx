@@ -10,7 +10,7 @@ import api from "../../utils/api";
 
 const Cart = () => {
     const [shopping, setShopping] = useState(false);
-    const [cartItems, setCartItems] = useState([]); // State for cart items
+    const [cartItems, setCartItems] = useState([]);
     const [totalCost, setTotalCost] = useState(0);
     const handleShopping = () => setShopping(true);
 
@@ -59,7 +59,19 @@ const Cart = () => {
         }
     };
 
-    // Calculate the total cost of items in the cart
+    const placeOrder = async () => {
+        try {
+            await api.post("/orders/add");
+            console.log("done1");
+            await api.get("/cart/clear");
+            console.log("done2");
+        }
+        catch (error) {
+            console.error("Error placing order:", error);
+        }
+
+    }
+
     const calculateTotalCost = (items) => {
         const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
         setTotalCost(total);

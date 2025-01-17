@@ -38,6 +38,15 @@
     margin: 0 auto;
 }
 
+.productItem a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    width: 100%;
+}
+
 .productItem img {
     background-color: #fff;
     width: 150px;

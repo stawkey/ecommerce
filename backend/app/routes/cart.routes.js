@@ -7,7 +7,7 @@ router.post("/add", authenticateJwtMiddleware, cartController.addItemToCart);
 router.post("/remove", authenticateJwtMiddleware, cartController.removeItemFromCart);
 router.get("/", authenticateJwtMiddleware, cartController.getUserCart);
 router.post("/update", authenticateJwtMiddleware, cartController.updateItemQuantity);
-router.post("/sync", authenticateJwtMiddleware, cartController.syncCart);
+router.get("/clear", authenticateJwtMiddleware, cartController.clearCart);
 
 module.exports = router;
 

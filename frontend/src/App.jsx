@@ -4,16 +4,15 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import OrderDetailsPage from "./pages/OrderDetailsPage/OrderDetailsPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import ProductPage from "./pages/ProductPage/ProductPage"
 import Cart from "./pages/Cart/Cart";
 import SuccessfulOrderPage from "./pages/SuccessfulOrderPage/SuccessfulOrderPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import globalRouter from "./utils/globalRouter";
-import { CartProvider } from "./contexts/CartContext";
 
 const App = () => (
-    <CartProvider>
         <BrowserRouter>
             <SetupGlobalNavigate />
             <Routes>
@@ -23,6 +22,7 @@ const App = () => (
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/product/:id" element={<ProductPage />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/orders/:id" element={<OrderDetailsPage />} />
                 <Route path="/success"
                     element={
                         <ProtectedRoute>
@@ -38,7 +38,6 @@ const App = () => (
                 />
             </Routes>
         </BrowserRouter>
-    </CartProvider>
 );
 
 const SetupGlobalNavigate = () => {
