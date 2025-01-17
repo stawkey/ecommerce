@@ -103,3 +103,31 @@ exports.getUserProfile = async (req, res) => {
         res.status(500).json({ message: "An error occurred while retrieving the user profile" });
     }
 };
+
+exports.isAdmin = async (req, res) => {
+    try {
+        const accessToken = req.cookies.access_token;
+
+        if (!accessToken) {
+            return res.status(401).json({ message: "No access token provided" });
+        }
+
+        jwt.verify(accessToken, process.env.SECRET_KEY, async (err, decoded) => {
+            if (err) {
+                return res.status(403).json({ message: "Invalid access token" });
+            }
+
+            const user = await User.findById(decoded.id).select("isAdmin");
+
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+
+            res.status(200).json({
+                isAdmin: user.isAdmin,
+            });
+        });
+    } catch (err) {
+        res.status(500).json({ message: "An error occurred while retrieving the user info" });
+    }
+};
