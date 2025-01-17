@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import SearchPage from "./pages/SearchPage/SearchPage";
+import ProductPage from "./pages/ProductPage/ProductPage"
 import Cart from "./pages/Cart/Cart";
 import SuccessfulOrderPage from "./pages/SuccessfulOrderPage/SuccessfulOrderPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
@@ -20,6 +21,7 @@ const App = () => (
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/search" element={<SearchPage />} />
+                <Route path="/product/:id" element={<ProductPage />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/success"
                     element={

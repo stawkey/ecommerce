@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./ProductsHighlights.module.css";
 import api from "../../utils/api";
+import { Link } from 'react-router-dom';
 
 
 const ProductsHighlights = () => {
@@ -44,10 +45,7 @@ const ProductsHighlights = () => {
 
 
     const handleAddToCart = async (event, product) => {
-        console.log('a')
         // event.preventDefault();
-        console.log('a')
-        console.log(product.id, product.title, product.price)
         try {
             await api.post(
                 "/cart/add",
@@ -55,9 +53,25 @@ const ProductsHighlights = () => {
                     productId: product.id,
                     title: product.title,
                     price: product.price,
+                    image: product.image,
                     quantity: 1,
                 });
             console.log("Added to cart");
+
+            await api.get(
+                "/cart"
+            )
+            console.log("checked");
+            // await api.post(
+            //     "/cart/remove",
+            //     {
+            //         productId: product.id,
+            //         title: product.title,
+            //         price: product.price,
+            //         quantity: 1,
+            //     }
+            // );
+            // console.log('deleted');
         } catch (error) {
             console.log(" Failed to add to cart");
         }
@@ -73,11 +87,11 @@ const ProductsHighlights = () => {
             <div className={style.items}>
                 {elements.map((product, index) => (
                     <div key={product.id || index} className={style.productCard} onSubmit={handleAddToCart}>
-                        <a href={`/product/${product.id}`}>
+                        <Link to={`/product/${product.id}`}>
                             <img src={product.image} alt={product.title} />
                             <h4>{cuttingText(product.title, 15)}</h4>
                             <p>{product.price} $</p>
-                        </a>
+                        </Link>
                         <button type="submit" onClick={(event) => handleAddToCart(event, product)}>
                             &#128722; Add to cart
                         </button>

@@ -30,8 +30,8 @@ const ProfilePage = () => {
             <div>
                 <div className={styles.profileHeader}>
                     <div className={styles.userInfo}>
-                        <h2>{userProfile.firstName}</h2>
-                        <h3>{userProfile.lastName}</h3>
+                        <h2>{userProfile.firstName} {userProfile.lastName}</h2>
+                        <h3>{userProfile.email}</h3>
                     </div>
                     <Link to="/">
                         <button className={styles.logoutBtn} onClick={handleLogout}>
