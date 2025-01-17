@@ -22,7 +22,6 @@ const Footer = () => {
                 <form onSubmit={handleSubmit} className={style.formContainer}>
                     <h4>Email:</h4>
                     <input
-                        placeholder="mail"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className={style.inputField}
@@ -30,7 +29,6 @@ const Footer = () => {
                     />
                     <h4>Message:</h4>
                     <input
-                        placeholder="message"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         className={style.inputField}
