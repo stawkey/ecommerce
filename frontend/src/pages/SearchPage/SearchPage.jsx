@@ -31,6 +31,8 @@ const SearchPage = () => {
                     product.category.toLowerCase().includes(query.toLowerCase())
             );
             setFilteredProducts(filtered);
+        } else {
+            setFilteredProducts(products);
         }
     }, [query, products]);
 
@@ -45,7 +47,8 @@ const SearchPage = () => {
                 <LoadingSpinner />
             ) : (
                 <div className={styles.searchWrapper}>
-                    <h1>Search Results for "{query}"</h1>
+                    <h1>{query ? `Search results for "${query}"` : "All products"}</h1>
+
                     <div className={styles.searchResults}>
                         {filteredProducts.length > 0 ? (
                             filteredProducts.map((product) => (

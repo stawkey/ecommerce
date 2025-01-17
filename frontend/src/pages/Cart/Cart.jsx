@@ -1,14 +1,12 @@
-import { React, useState, useEffect } from 'react';
-import Navbar from '../../components/Navbar/Navbar';
-import style from './Cart.module.css';
-import DeliveryForm from '../../components/DeliveryForm/DeliveryForm';
+import { React, useState, useEffect } from "react";
+import Navbar from "../../components/Navbar/Navbar";
+import style from "./Cart.module.css";
+import DeliveryForm from "../../components/DeliveryForm/DeliveryForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import api from "../../utils/api";
-
-
 
 const Cart = () => {
     const [shopping, setShopping] = useState(false);
@@ -19,9 +17,7 @@ const Cart = () => {
     useEffect(() => {
         const fetchCartItems = async () => {
             try {
-                console.log("huh")
                 const response = await api.get("/cart");
-                console.log("huh")
                 setCartItems(response.data.items || []);
                 calculateTotalCost(response.data.items);
             } catch (error) {
@@ -41,13 +37,12 @@ const Cart = () => {
                 quantity: 1,
             });
             setCartItems(response.data.items);
-            calculateTotalCost(response.data.items); 
-            console.log("Added to cart");
+            calculateTotalCost(response.data.items);
         } catch (error) {
             console.error("Error adding product to cart:", error);
         }
     };
-    
+
     const removeExistingProduct = async (product) => {
         try {
             const response = await api.post("/cart/remove", {
@@ -59,7 +54,6 @@ const Cart = () => {
             });
             setCartItems(response.data.items); // Zaktualizuj koszyk
             calculateTotalCost(response.data.items); // Przelicz koszt
-            console.log("Removed from cart");
         } catch (error) {
             console.error("Error removing product from cart:", error);
         }
@@ -84,12 +78,13 @@ const Cart = () => {
                                     <div>
                                         <strong>{item.title}</strong>
                                     </div>
-                                    <div><img src={item.image} className={style.cartImage}/></div>
+                                    <div>
+                                        <img src={item.image} className={style.cartImage} />
+                                    </div>
                                     <div>Price: ${item.price}</div>
                                     <div>Quantity: {item.quantity}</div>
                                     <button onClick={() => addExistingProduct(item)}>+</button>
                                     <button onClick={() => removeExistingProduct(item)}>-</button>
-                                    
                                 </li>
                             ))}
                         </ul>
@@ -103,11 +98,17 @@ const Cart = () => {
                         <h2>ORDER SUMMARY: </h2>
                         <ul>
                             <li>Total items cost: ${totalCost.toFixed(2)}</li>
-                            <li>Delivery cost: {totalCost > 0 ? '$5.00' : '-'}</li>
-                            <li>Total cost for order: {totalCost > 0 ? '$' + (totalCost + 5).toFixed(2) : '-'}</li>
+                            <li>Delivery cost: {totalCost > 0 ? "$5.00" : "-"}</li>
+                            <li>
+                                Total cost for order:{" "}
+                                {totalCost > 0 ? "$" + (totalCost + 5).toFixed(2) : "-"}
+                            </li>
                         </ul>
                         <Link to="/">
-                            <button className={style.orderNow} onClick={handleShopping}><FontAwesomeIcon icon={faCartShopping} className={style.cartIcon} /> ORDER NOW </button>
+                            <button className={style.orderNow} onClick={handleShopping}>
+                                <FontAwesomeIcon icon={faCartShopping} className={style.cartIcon} />{" "}
+                                ORDER NOW{" "}
+                            </button>
                         </Link>
                     </div>
                 </div>

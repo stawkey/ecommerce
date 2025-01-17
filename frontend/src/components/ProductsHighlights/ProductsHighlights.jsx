@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./ProductsHighlights.module.css";
 import api from "../../utils/api";
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 const ProductsHighlights = () => {
     const [products, setProducts] = useState([]);
@@ -21,15 +20,11 @@ const ProductsHighlights = () => {
     }, []);
 
     const handlingLeft = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? products.length - 1 : prevIndex - 1
-        );
+        setCurrentIndex((prevIndex) => (prevIndex === 0 ? products.length - 1 : prevIndex - 1));
     };
 
     const handlingRight = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === products.length - 1 ? 0 : prevIndex + 1
-        );
+        setCurrentIndex((prevIndex) => (prevIndex === products.length - 1 ? 0 : prevIndex + 1));
     };
 
     const cuttingText = (text, maxLength) => {
@@ -37,31 +32,24 @@ const ProductsHighlights = () => {
     };
 
     const elements = [
-        products[(currentIndex) % products.length],
+        products[currentIndex % products.length],
         products[(currentIndex + 1) % products.length],
         products[(currentIndex + 2) % products.length],
         products[(currentIndex + 3) % products.length],
     ];
 
-
     const handleAddToCart = async (event, product) => {
         // event.preventDefault();
         try {
-            await api.post(
-                "/cart/add",
-                {
-                    productId: product.id,
-                    title: product.title,
-                    price: product.price,
-                    image: product.image,
-                    quantity: 1,
-                });
-            console.log("Added to cart");
+            await api.post("/cart/add", {
+                productId: product.id,
+                title: product.title,
+                price: product.price,
+                image: product.image,
+                quantity: 1,
+            });
 
-            await api.get(
-                "/cart"
-            )
-            console.log("checked");
+            await api.get("/cart");
             // await api.post(
             //     "/cart/remove",
             //     {
@@ -71,11 +59,9 @@ const ProductsHighlights = () => {
             //         quantity: 1,
             //     }
             // );
-            // console.log('deleted');
         } catch (error) {
             console.log(" Failed to add to cart");
         }
-
     };
 
     if (products.length === 0) {
@@ -86,7 +72,11 @@ const ProductsHighlights = () => {
         <div className={style.container}>
             <div className={style.items}>
                 {elements.map((product, index) => (
-                    <div key={product.id || index} className={style.productCard} onSubmit={handleAddToCart}>
+                    <div
+                        key={product.id || index}
+                        className={style.productCard}
+                        onSubmit={handleAddToCart}
+                    >
                         <Link to={`/product/${product.id}`}>
                             <img src={product.image} alt={product.title} />
                             <h4>{cuttingText(product.title, 15)}</h4>
