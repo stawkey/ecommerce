@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import style from "./ProductPage.module.css";
 import Navbar from "../../components/Navbar/Navbar";
+import api from "../../utils/api";
+
 
 const ProductPage = () => {
     const { id } = useParams(); 
@@ -32,7 +34,19 @@ const ProductPage = () => {
             alert("Quantity must be at least 1");
             return;
         }
-        // cart handling needed asap
+        try {
+            await api.post(
+                "/cart/add",
+                {
+                    productId: product.id,
+                    title: product.title,
+                    price: product.price,
+                    image: product.image,
+                    quantity: quantity,
+                });
+            } catch (error) {
+                console.error("Error adding product to cart:", error);
+            }
     };
 
     if (!product) {

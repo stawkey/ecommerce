@@ -12,7 +12,7 @@ import api from "../../utils/api";
 
 const Cart = () => {
     const [shopping, setShopping] = useState(false);
-    const [cartItems, setCartItems] = useState([]); // State for cart items
+    const [cartItems, setCartItems] = useState([]);
     const [totalCost, setTotalCost] = useState(0);
     const handleShopping = () => setShopping(true);
 
@@ -57,15 +57,27 @@ const Cart = () => {
                 image: product.image,
                 quantity: 1,
             });
-            setCartItems(response.data.items); // Zaktualizuj koszyk
-            calculateTotalCost(response.data.items); // Przelicz koszt
+            setCartItems(response.data.items); 
+            calculateTotalCost(response.data.items); 
             console.log("Removed from cart");
         } catch (error) {
             console.error("Error removing product from cart:", error);
         }
     };
 
-    // Calculate the total cost of items in the cart
+    const placeOrder = async () => {
+        try {
+            await api.post("/orders/add");
+            console.log("done1");
+            await api.get("/cart/clear");
+            console.log("done2");
+        }
+        catch (error) {
+            console.error("Error placing order:", error);
+        }
+
+    }
+
     const calculateTotalCost = (items) => {
         const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
         setTotalCost(total);
@@ -107,7 +119,7 @@ const Cart = () => {
                             <li>Total cost for order: {totalCost > 0 ? '$' + (totalCost + 5).toFixed(2) : '-'}</li>
                         </ul>
                         <Link to="/">
-                            <button className={style.orderNow} onClick={handleShopping}><FontAwesomeIcon icon={faCartShopping} className={style.cartIcon} /> ORDER NOW </button>
+                            <button className={style.orderNow} onClick={placeOrder}><FontAwesomeIcon icon={faCartShopping} className={style.cartIcon} /> ORDER NOW </button>
                         </Link>
                     </div>
                 </div>

@@ -45,7 +45,6 @@ const ProductsHighlights = () => {
 
 
     const handleAddToCart = async (event, product) => {
-        // event.preventDefault();
         try {
             await api.post(
                 "/cart/add",
@@ -58,10 +57,15 @@ const ProductsHighlights = () => {
                 });
             console.log("Added to cart");
 
-            await api.get(
-                "/cart"
-            )
-            console.log("checked");
+            // await api.get(
+            //     "/cart/clear"
+            // )
+            // console.log("cleared");
+
+            // await api.get(
+            //     "/cart"
+            // )
+            // console.log("checked");
             // await api.post(
             //     "/cart/remove",
             //     {

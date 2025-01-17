@@ -6,7 +6,7 @@
     /* margin-top: 20px; */
     width: 40vw;
     height: 35rem;
-    background-color: #fff;
+    color: #fff;
     border: 5px solid #ccc;
 }
 
@@ -18,7 +18,7 @@ h4 {
     margin-bottom: 10px;
 }
 
-input {
+.deliveryContainer input {
     width: 80%;
     height: 30px;
     padding: 5px;

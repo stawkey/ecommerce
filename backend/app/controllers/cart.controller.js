@@ -5,7 +5,6 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 exports.addItemToCart = async (req, res) => {
-    console.log("AAAAAA");
     try {
         console.log(req.user);
         const { productId, title, price, image, quantity } = req.body;
@@ -16,7 +15,6 @@ exports.addItemToCart = async (req, res) => {
         //     return res.status(401).json({ error: "Unauthorized" });
         // }
         const userId = req.user.id;
-        // console.log("a tu?")
 
         let cart = await Cart.findOne({ userId });
         if (!cart) {
@@ -31,18 +29,14 @@ exports.addItemToCart = async (req, res) => {
         //         break;
         //     }
         // }
-        // console.log(productId)
         const itemIndex = cart.items.findIndex(item => item.productId === productId);
         console.log(cart)
         if (itemIndex > -1) {
             cart.items[itemIndex].quantity += quantity;
         } else {
             cart.items.push({ productId, title, price, image, quantity });
-            // console.log(cart.items)
         }
-
         await cart.save();
-        console.log("a pod sam koniec?")
         res.status(200).json(cart);
     } catch (err) {
         res.status(500).json({ error: "Failed to add item to cart" });
@@ -100,9 +94,7 @@ exports.updateItemQuantity = async (req, res) => {
 };
 
 exports.getUserCart = async (req, res) => {
-    console.log("lol")
     try {
-        // console.log(cart)
         const userId = req.user.id;
         const cart = await Cart.findOne({ userId }).populate("items.productId");
         if (!cart) {
@@ -116,29 +108,24 @@ exports.getUserCart = async (req, res) => {
     }
 };
 
-exports.syncCart = async (req, res) => {
+exports.clearCart = async (req, res) => {
     try {
-        const { items } = req.body;
         const userId = req.user.id;
 
         let cart = await Cart.findOne({ userId });
-        if (!cart) {
+
+        if (cart) {
+            cart.items = [];
+            await cart.save();
+        } else {
             cart = new Cart({ userId, items: [] });
+            await cart.save();
         }
 
-        items.forEach(({ productId, name, price, image, quantity }) => {
-            const itemIndex = cart.items.findIndex(item => item.productId.toString() === productId);
-            if (itemIndex > -1) {
-                cart.items[itemIndex].quantity += quantity;
-            } else {
-                cart.items.push({ productId, name, price, image, quantity });
-            }
-        });
-
-        await cart.save();
-        res.status(200).json(cart);
+        res.status(200).json(cart); 
     } catch (err) {
-        res.status(500).json({ error: "Failed to sync cart" });
+        console.error(err);
+        res.status(500).json({ error: "Failed to clear the cart" });
     }
 };
 
