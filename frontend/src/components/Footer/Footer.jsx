@@ -1,43 +1,50 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
-import style from './Footer.module.css'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import style from "./Footer.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faCopyright
-} from "@fortawesome/free-solid-svg-icons";
+import { faCopyright } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = () => {
     const currentYear = new Date();
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("Email:", email);
+        console.log("Message:", message);
+    };
+
     return (
         <div className={style.footerContainer}>
-            <div className={style.copyright}>
-                <h2>Copyright <FontAwesomeIcon icon={faCopyright} className={style.copyrightIcon} /> Leyndell {currentYear.getFullYear()} </h2>
-            </div>
-            <div className={style.middleText}>
-                <h2>CATEGORIES</h2>
-                <ul>
-                    <Link to="/search?q=men's clothing">
-                        <li>Men's clothing</li>
-                    </Link>
-                    <Link to="/search?q=jewelery">
-                        <li>Jewelery</li>
-                    </Link>
-                    <Link to="/search?q=electronics">
-                        <li>Electronics</li>
-                    </Link>
-                    <Link to="/search?q=women's clothing">
-                        <li>Women's clothing</li>
-                    </Link>
-                </ul>
-            </div>
             <div className={style.contact}>
-                <h2>Click <a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>HERE</a> if you want to contact with us!</h2>
-                <h4>Wpisz no maila:</h4>
-                <input placeholder='tu o mail'></input>
-                <h4>I jeszcze treść wiadomości, jeśli łaska</h4>
-                <input placeholder='właśnie tutaj'></input>
+                <h2>Contact us!</h2>
+                <form onSubmit={handleSubmit} className={style.formContainer}>
+                    <h4>Email:</h4>
+                    <input
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className={style.inputField}
+                        type="email"
+                    />
+                    <h4>Message:</h4>
+                    <input
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        className={style.inputField}
+                        type="text"
+                    />
+                    <button type="submit" className={style.submitButton}>
+                        Submit
+                    </button>
+                </form>
             </div>
-
+            <div className={style.copyright}>
+                <h2>
+                    Copyright <FontAwesomeIcon icon={faCopyright} className={style.copyrightIcon} />{" "}
+                    Leyndell {currentYear.getFullYear()}{" "}
+                </h2>
+            </div>
         </div>
     );
 };

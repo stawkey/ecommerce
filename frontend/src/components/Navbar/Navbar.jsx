@@ -16,9 +16,7 @@ const Navbar = ({ onSearch }) => {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        if (searchQuery.trim()) {
-            navigate(`/search?q=${searchQuery}`);
-        }
+        navigate(`/search${searchQuery.trim() ? `?q=${searchQuery}` : ""}`);
     };
 
     return (
@@ -35,6 +33,9 @@ const Navbar = ({ onSearch }) => {
                         {showCategories && (
                             <div className={styles.categoriesMenu}>
                                 <ul>
+                                    <Link to="/search">
+                                        <li>All products</li>
+                                    </Link>
                                     <Link to="/search?q=men's clothing">
                                         <li>Men's clothing</li>
                                     </Link>

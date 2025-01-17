@@ -6,7 +6,6 @@ const jwt = require("jsonwebtoken");
 
 exports.addItemToCart = async (req, res) => {
     try {
-        console.log(req.user);
         const { productId, title, price, image, quantity } = req.body;
         if (!productId || !title || !price || !image || !quantity) {
             return res.status(400).json({ error: "Invalid input data" });
@@ -21,16 +20,13 @@ exports.addItemToCart = async (req, res) => {
             cart = new Cart({ userId, items: [] });
         }
         // const itemIndex = -1
-        // console.log(cart)
         // for (let i = 0; i < cart.items.length; i++) {
-        //     console.log('a?')
         //     if (cart.items[i].productId == productId) {
         //         itemIndex = i;
         //         break;
         //     }
         // }
-        const itemIndex = cart.items.findIndex(item => item.productId === productId);
-        console.log(cart)
+        const itemIndex = cart.items.findIndex((item) => item.productId === productId);
         if (itemIndex > -1) {
             cart.items[itemIndex].quantity += quantity;
         } else {
@@ -80,7 +76,7 @@ exports.updateItemQuantity = async (req, res) => {
             return res.status(404).json({ message: "Cart not found" });
         }
 
-        const itemIndex = cart.items.findIndex(item => item.productId.toString() === productId);
+        const itemIndex = cart.items.findIndex((item) => item.productId.toString() === productId);
         if (itemIndex > -1) {
             cart.items[itemIndex].quantity = quantity;
             await cart.save();
@@ -100,8 +96,6 @@ exports.getUserCart = async (req, res) => {
         if (!cart) {
             return res.status(404).json({ message: "Cart not found" });
         }
-        console.log("GET:")
-        console.log(cart)
         res.status(200).json(cart);
     } catch (err) {
         res.status(500).json({ error: "Failed to get cart" });
@@ -128,4 +122,3 @@ exports.clearCart = async (req, res) => {
         res.status(500).json({ error: "Failed to clear the cart" });
     }
 };
-

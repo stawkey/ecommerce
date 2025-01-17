@@ -37,8 +37,8 @@ mongoose
 app.use("/api/auth", require("./app/routes/auth.routes"));
 app.use("/api/orders", require("./app/routes/orders.routes"));
 app.use("/api/cart", require("./app/routes/cart.routes"));
+app.use("/api/reviews", require("./app/routes/reviews.routes"));
 app.use(require("./app/middlewares/errorHandler.middleware"));
-// app.use(require("./app/middlewares/authenticateJwt.middleware"))
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

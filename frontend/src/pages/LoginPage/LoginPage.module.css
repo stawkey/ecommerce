@@ -40,7 +40,7 @@
     color: #000;
 }
 
-form {
+.loginContainer form {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -100,7 +100,7 @@ form {
     background-color: #f0f0f0;
 }
 
-button[type="submit"] {
+.loginContainer button[type="submit"] {
     padding: 10px 15px;
     font-size: 1rem;
     color: #fff;
@@ -111,10 +111,10 @@ button[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
+.loginContainer button[type="submit"]:hover {
     background-color: #333;
 }
 
-form {
+.loginContainer form {
     margin-bottom: 20px;
 }

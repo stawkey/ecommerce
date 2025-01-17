@@ -24,7 +24,6 @@ exports.createUser = async (req, res) => {
 
 exports.authenticateUser = async (req, res) => {
     try {
-        console.log("działa?");
         const user = await User.findOne({ email: req.body.email });
 
         if (!user) {
@@ -49,7 +48,7 @@ exports.authenticateUser = async (req, res) => {
         res.cookie("access_token", accessToken, {
             httpOnly: true,
             sameSite: "Strict",
-            maxAge: 15 * 60 * 1000, // 15 minutes
+            maxAge: 5 * 60 * 1000, // 5 minutes
         });
 
         res.cookie("refresh_token", refreshToken, {
@@ -61,48 +60,6 @@ exports.authenticateUser = async (req, res) => {
         res.status(200).json({ message: "Success!" });
     } catch (err) {
         res.status(500).json({ error: "An error occurred during authentication" });
-    }
-};
-
-exports.refresh = async (req, res) => {
-    try {
-        const refreshToken = req.cookies.refresh_token;
-
-        if (!refreshToken) {
-            return res.status(401).json({ message: "No refresh token provided" });
-        }
-
-        jwt.verify(refreshToken, process.env.SECRET_KEY, async (err, user) => {
-            if (err) {
-                return res.status(403).json({ message: "Invalid refresh token" });
-            }
-
-            const accessToken = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
-                algorithm: "HS256",
-                expiresIn: "15m",
-            });
-
-            const newRefreshToken = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
-                algorithm: "HS256",
-                expiresIn: "30d",
-            });
-
-            res.cookie("access_token", accessToken, {
-                httpOnly: true,
-                sameSite: "Strict",
-                maxAge: 15 * 60 * 1000, // 15 minutes
-            });
-
-            res.cookie("refresh_token", newRefreshToken, {
-                httpOnly: true,
-                sameSite: "Strict",
-                maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-            });
-
-            res.status(200).json({ message: "Tokens refreshed successfully" });
-        });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
     }
 };
 
@@ -136,7 +93,12 @@ exports.getUserProfile = async (req, res) => {
                 return res.status(404).json({ message: "User not found" });
             }
 
-            res.status(200).json({ firstName: user.firstName, lastName: user.lastName, email: user.email });
+            res.status(200).json({
+                userId: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+            });
         });
     } catch (err) {
         res.status(500).json({ message: "An error occurred while retrieving the user profile" });
