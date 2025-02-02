@@ -43,7 +43,9 @@ const ProfilePage = () => {
             <div>
                 <div className={styles.profileHeader}>
                     <div className={styles.userInfo}>
-                        <h2>{userProfile.firstName} {userProfile.lastName}</h2>
+                        <h2>
+                            {userProfile.firstName} {userProfile.lastName}
+                        </h2>
                         <h3>{userProfile.email}</h3>
                     </div>
                     <Link to="/">
@@ -59,9 +61,7 @@ const ProfilePage = () => {
                             <h3>Order {index + 1}</h3>
                             <p>Total cost: ${order.totalCost.toFixed(2)}</p>
                             <Link to={`/orders/${order._id}`}>
-                                <button className={styles.detailsButton}>
-                                    Details
-                                </button>
+                                <button className={styles.detailsButton}>Details</button>
                             </Link>
                         </div>
                     ))}

@@ -17,7 +17,9 @@ const Cart = () => {
     useEffect(() => {
         const fetchCartItems = async () => {
             try {
+                console.log("huh");
                 const response = await api.get("/cart");
+                console.log("huh");
                 setCartItems(response.data.items || []);
                 calculateTotalCost(response.data.items);
             } catch (error) {
@@ -38,6 +40,7 @@ const Cart = () => {
             });
             setCartItems(response.data.items);
             calculateTotalCost(response.data.items);
+            console.log("Added to cart");
         } catch (error) {
             console.error("Error adding product to cart:", error);
         }
@@ -52,8 +55,9 @@ const Cart = () => {
                 image: product.image,
                 quantity: 1,
             });
-            setCartItems(response.data.items); // Zaktualizuj koszyk
-            calculateTotalCost(response.data.items); // Przelicz koszt
+            setCartItems(response.data.items);
+            calculateTotalCost(response.data.items);
+            console.log("Removed from cart");
         } catch (error) {
             console.error("Error removing product from cart:", error);
         }
@@ -65,12 +69,10 @@ const Cart = () => {
             console.log("done1");
             await api.get("/cart/clear");
             console.log("done2");
-        }
-        catch (error) {
+        } catch (error) {
             console.error("Error placing order:", error);
         }
-
-    }
+    };
 
     const calculateTotalCost = (items) => {
         const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -117,7 +119,7 @@ const Cart = () => {
                             </li>
                         </ul>
                         <Link to="/">
-                            <button className={style.orderNow} onClick={handleShopping}>
+                            <button className={style.orderNow} onClick={placeOrder}>
                                 <FontAwesomeIcon icon={faCartShopping} className={style.cartIcon} />{" "}
                                 ORDER NOW{" "}
                             </button>
