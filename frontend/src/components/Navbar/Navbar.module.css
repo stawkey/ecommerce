@@ -2,15 +2,16 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
-    background-color: #fff;
+    background-color: #181a1b;
     position: relative;
     z-index: 1000;
     top: 0;
     left: 0;
-    height: 60px;
+    height: 65px;
 }
 
 .leftSection {
+    margin-left: 35px;
     justify-self: start;
     display: flex;
     flex-direction: row;
@@ -57,10 +58,12 @@
 }
 
 .logo {
-    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
     height: 50px;
+    font-family: "Merriweather", serif;
+    font-size: 2.5rem;
     font-weight: bold;
-    color: #000;
 }
 
 .searchBar {
@@ -73,6 +76,7 @@
 }
 
 .searchBar input {
+    text-align: center;
     flex: 1;
     border: none;
     border-radius: 0.5rem;
@@ -80,8 +84,8 @@
 }
 
 .searchBar button {
-    background-color: #000;
-    color: #fff;
+    background-color: #efe0fc;
+    color: #000;
     border: none;
     border-radius: 0.5rem;
     width: 2.5rem;
@@ -95,21 +99,25 @@
 }
 
 .icons {
-    justify-self: end;
     display: flex;
+    justify-self: end;
     font-size: 2rem;
     gap: 25px;
     padding: 0 35px;
 }
 
 .icon {
-    color: #000;
     cursor: pointer;
     padding: 8px;
 }
 
+.iconLink {
+    display: flex;
+    align-items: center;
+}
+
 .icon:hover,
 .categoriesBtn:hover {
-    background-color: #f0f0f0;
+    background-color: #1e1e1e;
     border-radius: 0.5rem;
 }

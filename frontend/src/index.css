@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 * {
     box-sizing: border-box;
 }
@@ -21,7 +23,21 @@ body {
 
 body {
     margin: 0;
-    background-color: #1e1e1e;
+    background-color: #171819;
+    color: #efe0dc;
     overflow-x: hidden;
-    font-family: "Merriweather", serif;
+    font-family: "Roboto", sans-serif;
+}
+
+@theme {
+    --animate-fadeIn: fadeIn 3s linear;
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 }

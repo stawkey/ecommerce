@@ -22,7 +22,7 @@ const Navbar = ({ onSearch }) => {
     return (
         <nav className={styles.navbar}>
             <div className={styles.leftSection}>
-                <div
+                {/* <div
                     className={styles.categoriesWrapper}
                     onMouseEnter={() => setShowCategories(true)}
                     onMouseLeave={() => setShowCategories(false)}
@@ -52,10 +52,10 @@ const Navbar = ({ onSearch }) => {
                             </div>
                         )}
                     </div>
+                </div> */}
+                <div className={styles.logo}>
+                    <Link to="/">Leyndell</Link>
                 </div>
-                <Link to="/" className={styles.logo}>
-                    Leyndell
-                </Link>
             </div>
             <div className={styles.searchBar}>
                 <input
@@ -64,15 +64,15 @@ const Navbar = ({ onSearch }) => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button type="submit" onClick={handleSearch}>
+                {/* <button type="submit" onClick={handleSearch}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
+                </button> */}
             </div>
             <div className={styles.icons}>
-                <Link to="/profile">
+                <Link to="/profile" className={styles.iconLink}>
                     <FontAwesomeIcon icon={faUser} className={styles.icon} />
                 </Link>
-                <Link to="/cart">
+                <Link to="/cart" className={styles.iconLink}>
                     <FontAwesomeIcon icon={faCartShopping} className={styles.icon} />
                 </Link>
             </div>
