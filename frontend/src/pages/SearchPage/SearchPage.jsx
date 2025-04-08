@@ -1,85 +1,138 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import styles from "./SearchPage.module.css";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import Product from "../../components/Product/Product";
+import Footer from "../../components/Footer/Footer";
 
 const SearchPage = () => {
-    const [products, setProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [imagesLoading, setImagesLoading] = useState({});
-    const { search } = useLocation();
-    const query = new URLSearchParams(search).get("q");
-
-    useEffect(() => {
-        const fetchProducts = async () => {
-            const response = await fetch("https://fakestoreapi.com/products");
-            const data = await response.json();
-            setProducts(data);
-            setLoading(false);
-        };
-
-        fetchProducts();
-    }, []);
-
-    useEffect(() => {
-        if (query) {
-            const filtered = products.filter(
-                (product) =>
-                    product.title.toLowerCase().includes(query.toLowerCase()) ||
-                    product.category.toLowerCase().includes(query.toLowerCase())
-            );
-            setFilteredProducts(filtered);
-        } else {
-            setFilteredProducts(products);
-        }
-    }, [query, products]);
-
-    const handleImageLoad = (id) => {
-        setImagesLoading((prev) => ({ ...prev, [id]: true }));
-    };
+    const products = [
+        {
+            id: 1,
+            name: "Fantastic headphones",
+            price: 999.99,
+            category: "Headphones",
+            img: "/images/headphones.jpeg",
+        },
+        {
+            id: 2,
+            name: "Fantastic keyboard",
+            price: 1234,
+            category: "Keyboards",
+            img: "/images/keyboard.jpg",
+        },
+        {
+            id: 3,
+            name: "Fantastic mouse",
+            price: 11111,
+            category: "Mice",
+            img: "/images/mouse.png",
+        },
+        {
+            id: 4,
+            name: "Fantastic microphone",
+            price: 0.1,
+            category: "Microphones",
+            img: "/images/microphone.png",
+        },
+        {
+            id: 1,
+            name: "Fantastic headphones",
+            price: 999.99,
+            category: "Headphones",
+            img: "/images/headphones.jpeg",
+        },
+        {
+            id: 2,
+            name: "Fantastic keyboard",
+            price: 1234,
+            category: "Keyboards",
+            img: "/images/keyboard.jpg",
+        },
+        {
+            id: 3,
+            name: "Fantastic mouse",
+            price: 11111,
+            category: "Mice",
+            img: "/images/mouse.png",
+        },
+        {
+            id: 4,
+            name: "Fantastic microphone",
+            price: 0.1,
+            category: "Microphones",
+            img: "/images/microphone.png",
+        },
+        {
+            id: 1,
+            name: "Fantastic headphones",
+            price: 999.99,
+            category: "Headphones",
+            img: "/images/headphones.jpeg",
+        },
+        {
+            id: 2,
+            name: "Fantastic keyboard",
+            price: 1234,
+            category: "Keyboards",
+            img: "/images/keyboard.jpg",
+        },
+        {
+            id: 3,
+            name: "Fantastic mouse",
+            price: 11111,
+            category: "Mice",
+            img: "/images/mouse.png",
+        },
+        {
+            id: 4,
+            name: "Fantastic microphone",
+            price: 0.1,
+            category: "Microphones",
+            img: "/images/microphone.png",
+        },
+        {
+            id: 1,
+            name: "Fantastic headphones",
+            price: 999.99,
+            category: "Headphones",
+            img: "/images/headphones.jpeg",
+        },
+        {
+            id: 2,
+            name: "Fantastic keyboard",
+            price: 1234,
+            category: "Keyboards",
+            img: "/images/keyboard.jpg",
+        },
+        {
+            id: 3,
+            name: "Fantastic mouse",
+            price: 11111,
+            category: "Mice",
+            img: "/images/mouse.png",
+        },
+        {
+            id: 4,
+            name: "Fantastic microphone",
+            price: 0.1,
+            category: "Microphones",
+            img: "/images/microphone.png",
+        },
+    ];
 
     return (
         <div>
             <Navbar />
-            {loading ? (
-                <LoadingSpinner />
-            ) : (
-                <div className={styles.searchWrapper}>
-                    <h1>{query ? `Search results for "${query}"` : "All products"}</h1>
-
-                    <div className={styles.searchResults}>
-                        {filteredProducts.length > 0 ? (
-                            filteredProducts.map((product) => (
-                                <div key={product.id} className={styles.productItem}>
-                                    <Link to={`/product/${product.id}`}>
-                                    {!imagesLoading[product.id] && <LoadingSpinner />}
-                                    <img
-                                        src={product.image}
-                                        alt={product.title}
-                                        onLoad={() => handleImageLoad(product.id)}
-                                        style={{
-                                            display: imagesLoading[product.id] ? "block" : "none",
-                                        }}
-                                    />
-                                    <h3>{product.title}</h3>
-                                    <div className={styles.detailsWrapper}>
-                                        <p className={styles.price}>${product.price}</p>
-                                        <div className={styles.rating}>
-                                            <span>⭐ {product.rating.rate} </span>
-                                            <span>({product.rating.count})</span>
-                                        </div>
-                                    </div>
-                                    </Link>
-                                </div>
-                            ))
-                        ) : (
-                            <p className={styles.noResults}>No products found.</p>
-                        )}
+            <div className="flex justify-center">
+                <div className="flex flex-col items-center w-2/3 mt-8">
+                    <h2 className="pb-5 text-4xl">Results for asdfghjkl</h2>
+                    <div className="flex flex-wrap justify-center">
+                        {products.map((product) => (
+                            <Product product={product} />
+                        ))}
                     </div>
                 </div>
-            )}
+            </div>
+            <Footer />
         </div>
     );
 };

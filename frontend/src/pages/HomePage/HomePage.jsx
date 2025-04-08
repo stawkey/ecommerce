@@ -56,24 +56,24 @@ const HomePage = () => {
 
     return (
         <div>
-            <div className="min-h-screen flex flex-col overflow-hidden">
+            <div className="flex flex-col min-h-screen overflow-hidden">
                 <Navbar />
-                <div className="flex flex-1 relative items-center justify-center">
+                <div className="relative flex items-center justify-center flex-1">
                     <img
                         className="absolute object-cover w-full h-full"
                         src="/images/main.png"
                         alt="Gaming background"
                     />
                     <div className="relative px-4 text-center">
-                        <h1 className="mb-6 text-4xl font-bold text-white md:text-7xl">
+                        <h1 className="md:text-7xl mb-6 text-4xl font-bold text-white">
                             Where precision meets perfection
                         </h1>
-                        <p className="mb-8 text-xl text-gray-200 md:text-2xl">
+                        <p className="md:text-2xl mb-8 text-xl text-gray-200">
                             High-performance gear for gamers and professionals
                         </p>
                         <button
                             onClick={scrollToCategories}
-                            className="px-8 py-2 text-xl font-bold text-white transition-all duration-300 ease-in-out bg-purple-600 rounded-full hover:bg-purple-700 hover:scale-110"
+                            className="hover:bg-purple-700 hover:scale-110 px-8 py-2 text-xl font-bold text-white transition-all duration-300 ease-in-out bg-purple-600 rounded-full"
                         >
                             <FontAwesomeIcon icon={faArrowDown} />
                         </button>
@@ -83,11 +83,11 @@ const HomePage = () => {
             {featuredProducts.map((product, index) => (
                 <FeaturedProduct key={product.id} product={product} reverse={index % 2 !== 0} />
             ))}
-            <div id="categoriesHeader" className="text-center pt-30">
+            <div id="categoriesHeader" className="pt-30 text-center">
                 <h2 className="text-4xl font-bold text-[#e2e0dc]">Discover our products</h2>
             </div>
-            <div className="container px-6 mx-auto my-10 max-w-4/5">
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center">
+            <div className="max-w-4/5 container px-6 mx-auto my-10">
+                <div className="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center grid grid-cols-1 gap-6">
                     {categories.map((category) => (
                         <CategoryCard key={category.id} category={category} />
                     ))}

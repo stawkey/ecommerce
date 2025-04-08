@@ -11,7 +11,7 @@ const CategoryCard = ({ category }) => {
                 ></img>
             </div>
             <div className="mb-6 text-center">
-                <h3 className="text-xl font-semibold m-0">{category.name}</h3>
+                <h3 className="m-0 text-xl font-semibold">{category.name}</h3>
             </div>
         </div>
     );

@@ -18,45 +18,6 @@
     align-items: center;
 }
 
-.categoriesWrapper {
-    margin: 0 35px 0 35px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-}
-
-.categoriesBtn {
-    font-size: 2rem;
-    display: flex;
-    align-items: center;
-    padding: 8px;
-}
-
-.categoriesMenu {
-    position: absolute;
-    top: 60px;
-    background-color: #fff;
-    border: #000 solid 3px;
-    border-radius: 0.5rem;
-    padding: 8px;
-}
-
-.categoriesMenu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.categoriesMenu li {
-    padding: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.categoriesMenu li:hover {
-    background-color: #f0f0f0;
-}
-
 .logo {
     display: flex;
     align-items: center;
@@ -81,21 +42,6 @@
     border: none;
     border-radius: 0.5rem;
     padding: 8px;
-}
-
-.searchBar button {
-    background-color: #efe0fc;
-    color: #000;
-    border: none;
-    border-radius: 0.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.1rem;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .icons {

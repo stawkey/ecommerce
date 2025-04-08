@@ -9,11 +9,11 @@ const FeaturedProduct = ({ product, reverse }) => {
                 }`}
                 style={{ backgroundColor: product.color }}
             >
-                <div className="text-center md:w-1/3 p-4">
-                    <h1 className="text-4xl md:text-5xl font-bold">{product.title}</h1>
+                <div className="md:w-1/3 p-4 text-center">
+                    <h1 className="md:text-5xl text-4xl font-bold">{product.title}</h1>
                     <p className="text-lg">{product.subtitle}</p>
                 </div>
-                <div className="w-1/3 flex justify-center">
+                <div className="flex justify-center w-1/3">
                     <img src={product.img} className="md:w-100 m-8 rounded-lg" />
                 </div>
             </div>

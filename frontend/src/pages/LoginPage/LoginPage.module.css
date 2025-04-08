@@ -16,8 +16,8 @@
     right: 0;
     padding: 10px;
     border: 1px solid red;
-    background-color: #ffe6e6;
-    color: red;
+    background-color: black;
+    color: #efe0dc;
     border-radius: 0.5rem;
     font-size: 1rem;
     text-align: center;
@@ -29,7 +29,7 @@
     align-items: center;
     width: 100%;
     padding: 20px;
-    background-color: #fff;
+    background-color: black;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
 }
@@ -37,7 +37,6 @@
 .loginContainer h2 {
     font-size: 1.8rem;
     margin: 10px 0 30px 0;
-    color: #000;
 }
 
 .loginContainer form {
@@ -56,7 +55,6 @@
     font-size: 1rem;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #000;
 }
 
 .inputLabel input {
@@ -68,7 +66,6 @@
 }
 
 .inputLabel input:focus {
-    border-color: #000;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -88,7 +85,6 @@
     right: 10px;
     padding: 5px 10px;
     font-size: 0.9rem;
-    color: #000;
     background: none;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
@@ -97,14 +93,14 @@
 }
 
 .showPasswordBtn:hover {
-    background-color: #f0f0f0;
+    background-color: #444444;
 }
 
 .loginContainer button[type="submit"] {
     padding: 10px 15px;
     font-size: 1rem;
-    color: #fff;
-    background-color: #000;
+    background-color: #efe0dc;
+    color: #171819;
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
