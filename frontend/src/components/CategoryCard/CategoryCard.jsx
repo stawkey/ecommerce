@@ -5,7 +5,7 @@ const CategoryCard = ({ category }) => {
         <div className="flex flex-col transition duration-300 ease-in-out bg-black rounded-lg shadow-md hover:bg-[#1e1e1e]">
             <div className="flex items-center justify-center flex-1 p-4">
                 <img
-                    className="object-contain max-w-full max-h-full rounded-lg"
+                    className="max-w-full max-h-full rounded-lg"
                     src={category.img}
                     alt={category.name}
                 ></img>
