@@ -10,6 +10,7 @@ import api from "../../utils/api";
 const HomePage = () => {
     const [categories, setCategories] = useState([]);
     const [featuredProducts, setFeaturedProducts] = useState([]);
+    const [arrowVisible, setArrowVisible] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,6 +35,24 @@ const HomePage = () => {
         categoriesHeader.scrollIntoView({ behavior: "smooth" });
     };
 
+    const handleScroll = () => {
+        const currentScrollPos = window.scrollY;
+
+        if (currentScrollPos < 10) {
+            setArrowVisible(true);
+        } else {
+            setArrowVisible(false);
+        }
+
+        setPrevScrollPos(currentScrollPos);
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
         <div>
             <div className="flex flex-col min-h-screen overflow-hidden">
@@ -51,13 +70,15 @@ const HomePage = () => {
                         <p className="md:text-2xl mb-8 text-xl text-gray-200">
                             High-performance gear for gamers and professionals
                         </p>
-                        <button
-                            onClick={scrollToCategories}
-                            className="hover:bg-purple-700 hover:scale-110 px-8 py-2 text-xl font-bold text-white transition-all duration-300 ease-in-out bg-purple-600 rounded-full"
-                        >
-                            <FontAwesomeIcon icon={faArrowDown} />
-                        </button>
                     </div>
+                    <button
+                        onClick={scrollToCategories}
+                        className={`text-2xl rounded-lg py-2 px-4 mt-8 animate-bounce absolute bottom-0 transition-opacity ease-in-out duration-500 hover:cursor-pointer ${
+                            arrowVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+                        }`}
+                    >
+                        <FontAwesomeIcon icon={faArrowDown} />
+                    </button>
                 </div>
             </div>
             {featuredProducts.map((product, index) => (

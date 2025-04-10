@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Product from "../../components/Product/Product";
+import Pagination from "../../components/Pagination/Pagination";
 import Footer from "../../components/Footer/Footer";
 import api from "../../utils/api";
 
@@ -10,6 +11,8 @@ const SearchPage = () => {
     const [pagination, setPagination] = useState(null);
     const [searchParams] = useSearchParams();
     const queryValue = searchParams.get("q");
+    const pageValue = searchParams.get("page") || "1";
+    const pageLimit = searchParams.get("limit") || "30";
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -18,7 +21,11 @@ const SearchPage = () => {
             setLoading(true);
             try {
                 const response = await api.get(`/products`, {
-                    params: { q: queryValue },
+                    params: {
+                        q: queryValue,
+                        page: pageValue,
+                        limit: pageLimit,
+                    },
                 });
                 setProducts(response.data.products || []);
                 setPagination(response.data.pagination);
@@ -33,7 +40,7 @@ const SearchPage = () => {
         };
 
         getProducts();
-    }, [queryValue]);
+    }, [queryValue, pageValue]);
 
     return (
         <div>
@@ -42,11 +49,11 @@ const SearchPage = () => {
                 <div className="flex flex-col items-center w-2/3 mt-8">
                     {loading && (
                         <div className="flex justify-center my-8">
-                            <div className="animate-spin rounded-full h-12 w-12 border-y-3 border-blue-500"></div>
+                            <div className="animate-spin border-y-3 w-12 h-12 border-blue-500 rounded-full"></div>
                         </div>
                     )}
 
-                    {error && <div className="text-red-500 my-4">{error}</div>}
+                    {error && <div className="my-4 text-red-500">{error}</div>}
 
                     {!loading && !error && (
                         <div className="flex flex-wrap justify-center">
@@ -59,8 +66,11 @@ const SearchPage = () => {
                             )}
                         </div>
                     )}
+
+                    {!loading && !error && pagination && <Pagination pagination={pagination} />}
                 </div>
             </div>
+
             <Footer />
         </div>
     );

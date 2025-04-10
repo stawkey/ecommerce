@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Use useNavigate for redirection
 import styles from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faUser,
-    faCartShopping,
-    faBars,
-    faMagnifyingGlass,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = ({ onSearch }) => {
     const [showCategories, setShowCategories] = useState(false);
