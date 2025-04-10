@@ -7,6 +7,7 @@
     margin: 100px auto;
     width: 100%;
     max-width: 400px;
+    color: black;
 }
 
 .messageBox {
@@ -17,7 +18,7 @@
     padding: 10px;
     border: 1px solid red;
     background-color: black;
-    color: #efe0dc;
+    color: black;
     border-radius: 0.5rem;
     font-size: 1rem;
     text-align: center;
@@ -29,7 +30,7 @@
     align-items: center;
     width: 100%;
     padding: 20px;
-    background-color: black;
+    background-color: #efe0dc;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
 }
@@ -99,8 +100,8 @@
 .loginContainer button[type="submit"] {
     padding: 10px 15px;
     font-size: 1rem;
-    background-color: #efe0dc;
-    color: #171819;
+    background-color: #171819;
+    color: #efe0dc;
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;

@@ -7,6 +7,7 @@
     margin: 50px auto;
     width: 100%;
     max-width: 400px;
+    color: #171819;
 }
 
 .messageBox {
@@ -16,7 +17,7 @@
     right: 0;
     padding: 10px;
     border: 1px solid red;
-    background-color: #ffe6e6;
+    background-color: #efe0dc;
     color: red;
     border-radius: 0.5rem;
     font-size: 1rem;
@@ -29,7 +30,7 @@
     align-items: center;
     width: 100%;
     padding: 20px;
-    background-color: #fff;
+    background-color: #efe0dc;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
 }
@@ -110,7 +111,7 @@
     padding: 10px 15px;
     font-size: 1rem;
     color: #fff;
-    background-color: #000;
+    background-color: #171819;
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;

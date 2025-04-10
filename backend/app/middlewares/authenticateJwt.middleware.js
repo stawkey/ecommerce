@@ -52,7 +52,8 @@ const authenticateJwt = async (req, res, next) => {
                         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
                     });
 
-                    return res.status(200).json({ message: "Tokens refreshed successfully" });
+                    req.user = { id: user.id };
+                    next();
                 });
             } catch (err) {
                 return res.status(500).json({ message: err.message });

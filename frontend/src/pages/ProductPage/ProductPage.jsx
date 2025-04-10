@@ -10,18 +10,22 @@ import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 const ProductPage = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
+    const [error, setError] = useState(null);
     const specRef = useRef(null);
     const [arrowVisible, setArrowVisible] = useState(true);
 
     useEffect(() => {
-        const fetchProduct = async () => {
+        const getProduct = async () => {
             try {
                 const response = await api.get(`/products/${id}`);
                 setProduct(response.data);
-            } catch (error) {
-                console.error("Error fetching product:", error);
+            } catch (err) {
+                console.error("Error fetching product:", err);
+                setError("Failed to load product");
             }
         };
+
+        getProduct();
     }, [id]);
 
     const handleScroll = () => {
@@ -40,11 +44,22 @@ const ProductPage = () => {
         window.addEventListener("scroll", handleScroll);
 
         return () => window.removeEventListener("scroll", handleScroll);
-    });
+    }, []);
 
     const scrollToSpecs = () => {
         specRef.current?.scrollIntoView({ behavior: "smooth" });
     };
+
+    if (error || !product)
+        return (
+            <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <div className="flex items-center justify-center flex-grow">
+                    <p className="text-xl text-red-500">{error || "Product not found"}</p>
+                </div>
+                <Footer />
+            </div>
+        );
 
     return (
         <div>
@@ -58,22 +73,10 @@ const ProductPage = () => {
                         />
                     </div>
                     <div className="md:w-1/3 flex flex-col justify-center">
-                        <h2 className="py-2 text-4xl font-bold">Fantastic headphones</h2>
-                        <h3 className="text-2xl">9999.99 pln</h3>
+                        <h2 className="py-2 text-4xl font-bold">{product.name}</h2>
+                        <h3 className="text-2xl">{product.price} pln</h3>
                         <p className="md:max-h-40 md:overflow-y-scroll mt-5">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-                            aliquet sodales sem, a efficitur ex pharetra ut. Pellentesque lacinia
-                            placerat egestas. Sed a augue sem. Sed sit amet venenatis nunc, nec
-                            hendrerit sapien. Aliquam fermentum mauris vitae suscipit aliquet.
-                            Nullam mauris nisi, commodo eu viverra quis, venenatis id orci.
-                            <br />
-                            <br />
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-                            aliquet sodales sem, a efficitur ex pharetra ut. Pellentesque lacinia
-                            placerat egestas. Sed a augue sem. Sed sit amet venenatis nunc, nec
-                            hendrerit sapien. Aliquam fermentum mauris vitae suscipit aliquet.
-                            Nullam mauris nisi, commodo eu viverra quis, venenatis id orci. Nullam
-                            eu condimentum dolor.
+                            {product.description}
                         </p>
                         <button className="bg-[#efe0dc] text-2xl text-black rounded-lg py-2 px-4 hover:bg-[#a4a4a4] mt-8 w-fit mx-auto md:mx-0">
                             Add to cart

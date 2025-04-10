@@ -35,6 +35,7 @@ exports.addItemToCart = async (req, res) => {
         await cart.save();
         res.status(200).json(cart);
     } catch (err) {
+        console.error(err);
         res.status(500).json({ error: "Failed to add item to cart" });
     }
 };
@@ -62,6 +63,7 @@ exports.removeItemFromCart = async (req, res) => {
 
         res.status(200).json(cart);
     } catch (err) {
+        console.error(err);
         res.status(500).json({ error: "Failed to remove item from cart" });
     }
 };
@@ -85,6 +87,7 @@ exports.updateItemQuantity = async (req, res) => {
 
         res.status(404).json({ message: "Item not found in cart" });
     } catch (err) {
+        console.error(err);
         res.status(500).json({ error: "Failed to update item quantity" });
     }
 };
@@ -98,6 +101,7 @@ exports.getUserCart = async (req, res) => {
         }
         res.status(200).json(cart);
     } catch (err) {
+        console.error(err);
         res.status(500).json({ error: "Failed to get cart" });
     }
 };
@@ -116,8 +120,9 @@ exports.clearCart = async (req, res) => {
             await cart.save();
         }
 
-        res.status(200).json(cart); 
+        res.status(200).json(cart);
     } catch (err) {
+        console.error(err);
         console.error(err);
         res.status(500).json({ error: "Failed to clear the cart" });
     }

@@ -1,58 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import FeaturedProduct from "../../components/FeaturedProduct/FeaturedProduct";
+import api from "../../utils/api";
 
 const HomePage = () => {
+    const [categories, setCategories] = useState([]);
+    const [featuredProducts, setFeaturedProducts] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [categoriesResponse, productsResponse] = await Promise.all([
+                    api.get("/categories"),
+                    api.get("/featured-products"),
+                ]);
+
+                setCategories(categoriesResponse.data);
+                setFeaturedProducts(productsResponse.data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     const scrollToCategories = () => {
-        const categories = document.getElementById("categoriesHeader");
-        categories.scrollIntoView({ behavior: "smooth" });
+        const categoriesHeader = document.getElementById("categoriesHeader");
+        categoriesHeader.scrollIntoView({ behavior: "smooth" });
     };
-
-    const categories = [
-        {
-            id: 1,
-            name: "Headphones",
-            img: "/images/headphones.jpeg",
-        },
-        {
-            id: 2,
-            name: "Keyboards",
-            img: "/images/keyboard.jpg",
-        },
-        {
-            id: 3,
-            name: "Mice",
-            img: "/images/mouse.png",
-        },
-        {
-            id: 4,
-            name: "Microphones",
-            img: "/images/microphone.png",
-        },
-    ];
-
-    const featuredProducts = [
-        {
-            id: 1,
-            title: "Every move matters",
-            subtitle: "Some random text, no idea what to write here",
-            img: "/images/mouse.png",
-            color: "#414932",
-            link: "/products/1",
-        },
-        {
-            id: 2,
-            title: "A title",
-            subtitle: "Still have no idea what I should put here",
-            img: "/images/headphones.jpeg",
-            color: "#51311b",
-            link: "/products/2",
-        },
-    ];
 
     return (
         <div>
@@ -81,7 +61,7 @@ const HomePage = () => {
                 </div>
             </div>
             {featuredProducts.map((product, index) => (
-                <FeaturedProduct key={product.id} product={product} reverse={index % 2 !== 0} />
+                <FeaturedProduct key={product._id} product={product} reverse={index % 2 !== 0} />
             ))}
             <div id="categoriesHeader" className="pt-30 text-center">
                 <h2 className="text-4xl font-bold text-[#e2e0dc]">Discover our products</h2>
@@ -89,7 +69,7 @@ const HomePage = () => {
             <div className="max-w-4/5 container px-6 mx-auto my-10">
                 <div className="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center grid grid-cols-1 gap-6">
                     {categories.map((category) => (
-                        <CategoryCard key={category.id} category={category} />
+                        <CategoryCard key={category._id} category={category} />
                     ))}
                 </div>
             </div>
