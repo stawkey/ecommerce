@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../utils/api";
-import Navbar from "../../components/Navbar/Navbar";
 import SpecificationTable from "../../components/SpecificationTable/SpecificationTable";
-import Footer from "../../components/Footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import ErrorBox from "../../components/ErrorBox/ErrorBox";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
@@ -16,6 +14,10 @@ const ProductPage = () => {
     const [error, setError] = useState(null);
     const specRef = useRef(null);
     const [arrowVisible, setArrowVisible] = useState(true);
+    const [cartNotification, setCartNotification] = useState({
+        visible: false,
+        message: "",
+    });
 
     useEffect(() => {
         const getProduct = async () => {
@@ -54,32 +56,37 @@ const ProductPage = () => {
         specRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
+    const showNotification = (message) => {
+        setCartNotification({
+            visible: true,
+            message,
+        });
+
+        setTimeout(() => {
+            setCartNotification({
+                visible: false,
+                message: "",
+            });
+        }, 3000);
+    };
+
     const addToCart = async () => {
-        try {
-            setLoading(true);
-            const response = await api.post("/cart/products", { productId, quantity: 1 });
-            // TODO: jakis feedback ze sie dodalo
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
+        showNotification("Product added to cart");
     };
 
     if (loading) {
-        return (
-            <div>
-                <Navbar />
-                <LoadingSpinner />
-                <Footer />
-            </div>
-        );
+        return <LoadingSpinner />;
     }
 
     return (
         <div>
-            <Navbar />
             {loading && <LoadingSpinner />}
+            {cartNotification.visible && (
+                <div className="fixed top-20 right-0 left-0 w-fit mx-auto bg-[#efe0dc] text-[#171819] p-3 rounded-lg z-1000 flex items-center gap-2 transition-all duration-300">
+                    <FontAwesomeIcon icon={faCheckCircle} className="text-green-600" />
+                    <span>{cartNotification.message}</span>
+                </div>
+            )}
             {error || !product ? (
                 <ErrorBox error={error} setError={setError} />
             ) : (
@@ -121,7 +128,6 @@ const ProductPage = () => {
             <div className="mb-30">
                 <SpecificationTable ref={specRef} />
             </div>
-            <Footer />
         </div>
     );
 };

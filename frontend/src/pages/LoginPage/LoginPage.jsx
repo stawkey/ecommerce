@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import api from "../../utils/api";
-import Navbar from "../../components/Navbar/Navbar";
 import ErrorBox from "../../components/ErrorBox/ErrorBox";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
@@ -45,54 +44,51 @@ const LoginPage = () => {
     };
 
     return (
-        <>
-            <Navbar />
-            <div className={styles.loginWrapper}>
-                {loading && <LoadingSpinner />}
-                {error && <ErrorBox error={error} setError={setError} />}
-                <div className={styles.loginContainer}>
-                    <h2>Login</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className={styles.inputLabel}>
-                            <label htmlFor="email">Email</label>
+        <div className={styles.loginWrapper}>
+            {loading && <LoadingSpinner />}
+            {error && <ErrorBox error={error} setError={setError} />}
+            <div className={styles.loginContainer}>
+                <h2>Login</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className={styles.inputLabel}>
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="text"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className={styles.inputLabel}>
+                        <label htmlFor="password">Password</label>
+                        <div className={styles.passwordInputWrapper}>
                             <input
-                                type="text"
-                                id="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
+                            <button
+                                type="button"
+                                onClick={toggleShowPassword}
+                                className={styles.showPasswordBtn}
+                            >
+                                {showPassword ? (
+                                    <FontAwesomeIcon icon={faEye} />
+                                ) : (
+                                    <FontAwesomeIcon icon={faEyeSlash} />
+                                )}
+                            </button>
                         </div>
-                        <div className={styles.inputLabel}>
-                            <label htmlFor="password">Password</label>
-                            <div className={styles.passwordInputWrapper}>
-                                <input
-                                    type={showPassword ? "text" : "password"}
-                                    id="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                />
-                                <button
-                                    type="button"
-                                    onClick={toggleShowPassword}
-                                    className={styles.showPasswordBtn}
-                                >
-                                    {showPassword ? (
-                                        <FontAwesomeIcon icon={faEye} />
-                                    ) : (
-                                        <FontAwesomeIcon icon={faEyeSlash} />
-                                    )}
-                                </button>
-                            </div>
-                        </div>
+                    </div>
 
-                        <button type="submit">Login</button>
-                    </form>
-                    <Link to="/register">Don't have an account yet?</Link>
-                </div>
+                    <button type="submit">Login</button>
+                </form>
+                <Link to="/register">Don't have an account yet?</Link>
             </div>
-        </>
+        </div>
     );
 };
 

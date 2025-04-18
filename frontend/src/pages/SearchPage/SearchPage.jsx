@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import Navbar from "../../components/Navbar/Navbar";
 import Product from "../../components/Product/Product";
 import Pagination from "../../components/Pagination/Pagination";
-import Footer from "../../components/Footer/Footer";
 import api from "../../utils/api";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import ErrorBox from "../../components/ErrorBox/ErrorBox";
@@ -46,7 +44,6 @@ const SearchPage = () => {
 
     return (
         <div>
-            <Navbar />
             <div className="flex justify-center">
                 <div className="flex flex-col items-center w-2/3 mt-8">
                     {loading && <LoadingSpinner />}
@@ -68,8 +65,6 @@ const SearchPage = () => {
                     {!loading && !error && pagination && <Pagination pagination={pagination} />}
                 </div>
             </div>
-
-            <Footer />
         </div>
     );
 };

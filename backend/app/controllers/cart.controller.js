@@ -101,16 +101,22 @@ exports.updateCartProduct = async (req, res) => {
 
         const productIndex = cart.products.findIndex((p) => p.productId.toString() === productId);
 
-        if (quantity <= 0) {
-            cart.products.splice(productIndex, 1);
+        if (productIndex > -1) {
+            const newQuantity = cart.products[productIndex].quantity + quantity;
+
+            if (newQuantity <= 0) {
+                cart.products.splice(productIndex, 1);
+            } else {
+                cart.products[productIndex].quantity = newQuantity;
+            }
+
+            await cart.calculateTotal();
+            await cart.save();
+
+            res.status(200).json(cart);
         } else {
-            cart.products[productIndex].quantity += quantity;
+            return res.status(404).json({ message: "Product not found in cart" });
         }
-
-        cart.calculateTotal();
-        cart.save();
-
-        res.status(200).json(cart);
     } catch (err) {
         console.error("Error in updateCartProduct:", err);
         res.status(500).json({

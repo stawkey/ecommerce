@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import api from "../../utils/api";
-import Navbar from "../../components/Navbar/Navbar";
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
@@ -52,81 +51,76 @@ const LoginPage = () => {
     };
 
     return (
-        <>
-            <Navbar />
-            <div className={styles.loginWrapper}>
-                {showMessage && <div className={styles.messageBox}>{message}</div>}
-                <div className={styles.loginContainer}>
-                    <h2>Register</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className={styles.inputLabel}>
-                            <label htmlFor="firstName">First Name</label>
+        <div className={styles.loginWrapper}>
+            {showMessage && <div className={styles.messageBox}>{message}</div>}
+            <div className={styles.loginContainer}>
+                <h2>Register</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className={styles.inputLabel}>
+                        <label htmlFor="firstName">First Name</label>
+                        <input
+                            type="text"
+                            id="firstName"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className={styles.inputLabel}>
+                        <label htmlFor="lastName">Last Name</label>
+                        <input
+                            type="text"
+                            id="lastName"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className={styles.inputLabel}>
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="text"
+                            id="email"
+                            value={email}
+                            onChange={(e) => {
+                                setEmail(e.target.value);
+                                setIsValid(emailRegex.test(e.target.value));
+                            }}
+                            required
+                        />
+                        {!isValid && <p className={styles.errorMessage}>Invalid email format</p>}
+                    </div>
+                    <div className={styles.inputLabel}>
+                        <label htmlFor="password">Password</label>
+                        <div className={styles.passwordInputWrapper}>
                             <input
-                                type="text"
-                                id="firstName"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
+                            <button
+                                type="button"
+                                onClick={toggleShowPassword}
+                                className={styles.showPasswordBtn}
+                            >
+                                {showPassword ? (
+                                    <FontAwesomeIcon icon={faEye} />
+                                ) : (
+                                    <FontAwesomeIcon icon={faEyeSlash} />
+                                )}
+                            </button>
                         </div>
-                        <div className={styles.inputLabel}>
-                            <label htmlFor="lastName">Last Name</label>
-                            <input
-                                type="text"
-                                id="lastName"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div className={styles.inputLabel}>
-                            <label htmlFor="email">Email</label>
-                            <input
-                                type="text"
-                                id="email"
-                                value={email}
-                                onChange={(e) => {
-                                    setEmail(e.target.value);
-                                    setIsValid(emailRegex.test(e.target.value));
-                                }}
-                                required
-                            />
-                            {!isValid && (
-                                <p className={styles.errorMessage}>Invalid email format</p>
-                            )}
-                        </div>
-                        <div className={styles.inputLabel}>
-                            <label htmlFor="password">Password</label>
-                            <div className={styles.passwordInputWrapper}>
-                                <input
-                                    type={showPassword ? "text" : "password"}
-                                    id="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                />
-                                <button
-                                    type="button"
-                                    onClick={toggleShowPassword}
-                                    className={styles.showPasswordBtn}
-                                >
-                                    {showPassword ? (
-                                        <FontAwesomeIcon icon={faEye} />
-                                    ) : (
-                                        <FontAwesomeIcon icon={faEyeSlash} />
-                                    )}
-                                </button>
-                            </div>
-                        </div>
+                    </div>
 
-                        <button type="submit" disabled={!isValid}>
-                            Register
-                        </button>
-                    </form>
-                    <Link to="/login">Already have an account?</Link>
-                </div>
+                    <button type="submit" disabled={!isValid}>
+                        Register
+                    </button>
+                </form>
+                <Link to="/login">Already have an account?</Link>
             </div>
-        </>
+        </div>
     );
 };
 

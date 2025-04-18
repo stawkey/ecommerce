@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
-    background-color: #181a1b;
+    background-color: #121314;
     position: relative;
     z-index: 1000;
     top: 0;
