@@ -29,7 +29,7 @@ const ProfilePage = () => {
                 });
                 setUserProfile(profileResponse.data);
 
-                const ordersResponse = await api.get("/orders/user", { withCredentials: true });
+                const ordersResponse = await api.get("/order", { withCredentials: true });
                 setOrders(ordersResponse.data);
             } catch (err) {
                 console.error("Error fetching data:", err);

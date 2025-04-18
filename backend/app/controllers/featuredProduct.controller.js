@@ -19,8 +19,11 @@ exports.getAllFeaturedProducts = async (req, res) => {
 
         res.status(200).json(transformedProducts);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "An error occurred while getting featured products" });
+        console.error("Error in getAllFeaturedProducts:", err);
+        res.status(500).json({
+            message: "Server error",
+            error: err.message,
+        });
     }
 };
 
@@ -30,8 +33,11 @@ exports.addFeaturedProduct = async (req, res) => {
         await newFeaturedProduct.save();
         res.status(201).json(newFeaturedProduct);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "An error occurred while adding a featured product" });
+        console.error("Error in addFeaturedProduct:", err);
+        res.status(500).json({
+            message: "Server error",
+            error: err.message,
+        });
     }
 };
 
@@ -43,8 +49,11 @@ exports.updateFeaturedProduct = async (req, res) => {
         if (!featuredProduct) return res.status(404).json({ error: "Featured product not found" });
         res.status(200).json(featuredProduct);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "An error occurred while updating a featured product" });
+        console.error("Error in updateFeaturedProduct:", err);
+        res.status(500).json({
+            message: "Server error",
+            error: err.message,
+        });
     }
 };
 
@@ -54,7 +63,10 @@ exports.deleteFeaturedProduct = async (req, res) => {
         if (!featuredProduct) return res.status(404).json({ error: "Featured product not found" });
         res.status(200).json("Featured product deleted");
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "An error occurred while deleting a featured product" });
+        console.error("Error in deleteFeaturedProduct:", err);
+        res.status(500).json({
+            message: "Server error",
+            error: err.message,
+        });
     }
 };

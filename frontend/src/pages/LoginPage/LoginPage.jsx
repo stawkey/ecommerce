@@ -5,17 +5,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import api from "../../utils/api";
 import Navbar from "../../components/Navbar/Navbar";
+import ErrorBox from "../../components/ErrorBox/ErrorBox";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
-    const [showMessage, setShowMessage] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setLoading(true);
 
         try {
             const response = await api.post(
@@ -24,17 +28,16 @@ const LoginPage = () => {
                 { headers: { "Content-Type": "application/json" } }
             );
 
-            setMessage(response.data.message);
+            setError(response.data.message);
 
             if (response.status === 200) {
                 navigate("/");
             }
         } catch (error) {
-            setMessage(error.response?.data?.message || "Login failed");
+            setError(error.response?.data?.message || "Login failed");
+        } finally {
+            setLoading(false);
         }
-
-        setShowMessage(true);
-        setTimeout(() => setShowMessage(false), 3000);
     };
 
     const toggleShowPassword = () => {
@@ -45,7 +48,8 @@ const LoginPage = () => {
         <>
             <Navbar />
             <div className={styles.loginWrapper}>
-                {showMessage && <div className={styles.messageBox}>{message}</div>}
+                {loading && <LoadingSpinner />}
+                {error && <ErrorBox error={error} setError={setError} />}
                 <div className={styles.loginContainer}>
                     <h2>Login</h2>
                     <form onSubmit={handleSubmit}>

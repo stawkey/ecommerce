@@ -6,14 +6,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import FeaturedProduct from "../../components/FeaturedProduct/FeaturedProduct";
 import api from "../../utils/api";
+import ErrorBox from "../../components/ErrorBox/ErrorBox";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const HomePage = () => {
     const [categories, setCategories] = useState([]);
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const [arrowVisible, setArrowVisible] = useState(true);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
+            setError(null);
+
             try {
                 const [categoriesResponse, productsResponse] = await Promise.all([
                     api.get("/categories"),
@@ -24,6 +31,9 @@ const HomePage = () => {
                 setFeaturedProducts(productsResponse.data);
             } catch (err) {
                 console.error(err);
+                setError("Failed to load content. Please try again later.");
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -43,8 +53,6 @@ const HomePage = () => {
         } else {
             setArrowVisible(false);
         }
-
-        setPrevScrollPos(currentScrollPos);
     };
 
     useEffect(() => {
@@ -55,6 +63,8 @@ const HomePage = () => {
 
     return (
         <div>
+            {loading && <LoadingSpinner />}
+            {error && <ErrorBox error={error} setError={setError} />}
             <div className="flex flex-col min-h-screen overflow-hidden">
                 <Navbar />
                 <div className="relative flex items-center justify-center flex-1">

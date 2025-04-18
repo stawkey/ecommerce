@@ -5,6 +5,8 @@ import Product from "../../components/Product/Product";
 import Pagination from "../../components/Pagination/Pagination";
 import Footer from "../../components/Footer/Footer";
 import api from "../../utils/api";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import ErrorBox from "../../components/ErrorBox/ErrorBox";
 
 const SearchPage = () => {
     const [products, setProducts] = useState([]);
@@ -47,13 +49,9 @@ const SearchPage = () => {
             <Navbar />
             <div className="flex justify-center">
                 <div className="flex flex-col items-center w-2/3 mt-8">
-                    {loading && (
-                        <div className="flex justify-center my-8">
-                            <div className="animate-spin border-y-3 w-12 h-12 border-blue-500 rounded-full"></div>
-                        </div>
-                    )}
+                    {loading && <LoadingSpinner />}
 
-                    {error && <div className="my-4 text-red-500">{error}</div>}
+                    {error && <ErrorBox error={error} setError={setError} />}
 
                     {!loading && !error && (
                         <div className="flex flex-wrap justify-center">

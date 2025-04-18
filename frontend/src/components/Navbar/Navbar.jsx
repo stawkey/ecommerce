@@ -4,7 +4,7 @@ import styles from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
-const Navbar = ({ onSearch }) => {
+const Navbar = () => {
     const [showCategories, setShowCategories] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const navigate = useNavigate();

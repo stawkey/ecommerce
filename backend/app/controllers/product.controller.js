@@ -4,6 +4,9 @@ const Product = db.product;
 exports.searchProducts = async (req, res) => {
     try {
         const { page = 1, limit = 10, q = "" } = req.query;
+        if (limit > 50) {
+            limit = 50;
+        }
         const skip = (page - 1) * limit;
 
         let query = {};
@@ -34,8 +37,11 @@ exports.searchProducts = async (req, res) => {
             },
         });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "An error occurred while getting the products" });
+        console.error("Error in searchProducts:", err);
+        res.status(500).json({
+            message: "Server error",
+            error: err.message,
+        });
     }
 };
 
@@ -45,8 +51,11 @@ exports.getProductById = async (req, res) => {
         if (!product) return res.status(404).json({ error: "Product not found" });
         res.status(200).json(product);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "An error occurred while getting the product" });
+        console.error("Error in getProductById:", err);
+        res.status(500).json({
+            message: "Server error",
+            error: err.message,
+        });
     }
 };
 
@@ -56,8 +65,11 @@ exports.addProduct = async (req, res) => {
         await newProduct.save();
         res.status(201).json(newProduct);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "An error occurred while adding the product" });
+        console.error("Error in addProduct:", err);
+        res.status(500).json({
+            message: "Server error",
+            error: err.message,
+        });
     }
 };
 
@@ -67,8 +79,11 @@ exports.updateProduct = async (req, res) => {
         if (!product) return res.status(404).json({ error: "Product not found" });
         res.status(200).json(product);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "An error occurred while updating a product" });
+        console.error("Error in updateProduct:", err);
+        res.status(500).json({
+            message: "Server error",
+            error: err.message,
+        });
     }
 };
 
@@ -78,7 +93,10 @@ exports.deleteProduct = async (req, res) => {
         if (!product) return res.status(404).json({ error: "Product  not found" });
         res.status(200).json("Product deleted");
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "An error occurred while deleting a product" });
+        console.error("Error in deleteProduct:", err);
+        res.status(500).json({
+            message: "Server error",
+            error: err.message,
+        });
     }
 };

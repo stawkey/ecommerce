@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const { Decimal128 } = mongoose.Types;
 
+const { priceToFloat, priceToDecimal } = require("./utils/priceHelpers");
+
 const productSchema = new mongoose.Schema(
     {
         name: { type: String, required: true, trim: true },
@@ -12,20 +14,6 @@ const productSchema = new mongoose.Schema(
     },
     { timestamps: true, toJSON: { getters: true } }
 );
-
-function priceToFloat(value) {
-    if (typeof value !== "undefined") {
-        return parseFloat(value.toString());
-    }
-    return value;
-}
-
-function priceToDecimal(value) {
-    if (!isNaN(value)) {
-        return Decimal128.fromString(value);
-    }
-    return Decimal128.fromString("0");
-}
 
 productSchema.index({ name: "text", description: "text" });
 

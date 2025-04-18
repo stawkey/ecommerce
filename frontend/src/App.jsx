@@ -4,13 +4,12 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import OrderDetailsPage from "./pages/OrderDetailsPage/OrderDetailsPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import ProductPage from "./pages/ProductPage/ProductPage";
-import Cart from "./pages/Cart/Cart";
-import SuccessfulOrderPage from "./pages/SuccessfulOrderPage/SuccessfulOrderPage";
+import CartPage from "./pages/CartPage/CartPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import globalRouter from "./utils/globalRouter";
+import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 
 const App = () => (
     <BrowserRouter>
@@ -21,16 +20,8 @@ const App = () => (
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/products/:id" element={<ProductPage />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/orders/:id" element={<OrderDetailsPage />} />
-            <Route
-                path="/success"
-                element={
-                    <ProtectedRoute>
-                        <SuccessfulOrderPage />
-                    </ProtectedRoute>
-                }
-            />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout/" element={<CheckoutPage />} />
             <Route
                 path="/profile"
                 element={

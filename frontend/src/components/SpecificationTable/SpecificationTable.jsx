@@ -7,7 +7,7 @@ const SpecificationTable = forwardRef((props, ref) => {
             <div className="w-3/5">
                 <h2 className="text-4xl text-left mb-3">Specifications</h2>
             </div>
-            <table className="w-3/5">
+            <table className="w-3/5 divide-y divide-[#efe0dc] border-y border-[#efe0dc]">
                 <tbody>
                     <SpecificationRow label="Connection" value="Wireless" />
                     <SpecificationRow label="Material" value="Aluminium" />
