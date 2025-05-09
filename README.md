@@ -45,12 +45,23 @@ Our e-commerce platform has the following functionalities:
 
 To get the project up and running on your local machine, follow these setup instructions:
 
-### Prerequisites
+### Option 1: Using Docker
 
-Ensure you have Node.js and npm installed.
-A MongoDB instance should be running and accessible.
+If you have Docker and Docker Compose installed, you can build and run the application using:
 
-### Installation & Setup
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/stawkey/leyndell.git
+    cd leyndell
+    ```
+
+2.  **Build and Run with Docker Compose:**
+    From the root directory of the project (`leyndell`), run:
+    ```bash
+    docker-compose up --build -d
+    ```
+
+### Option 2: Manual Installation & Setup
 
 1.  **Clone the repository:**
     ```bash
