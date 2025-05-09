@@ -56,7 +56,6 @@ If you have Docker and Docker Compose installed, you can build and run the appli
     ```
 
 2.  **Build and Run with Docker Compose:**
-    From the root directory of the project (`leyndell`), run:
     ```bash
     docker-compose up --build -d
     ```
@@ -97,4 +96,4 @@ If you have Docker and Docker Compose installed, you can build and run the appli
     npm run dev
     ```
 
-Once both frontend and backend servers are running, you should be able to access the application in your browser (usually at `http://localhost:5173`).
+Once both frontend and backend servers are running, you should be able to access the application in your browser at `http://localhost:5173`.
