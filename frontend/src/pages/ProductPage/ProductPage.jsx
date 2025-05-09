@@ -71,7 +71,15 @@ const ProductPage = () => {
     };
 
     const addToCart = async () => {
-        showNotification("Product added to cart");
+        try {
+            setLoading(true);
+            const response = await api.post("/cart/products", { productId, quantity: 1 });
+            showNotification("Product added to cart");
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
     };
 
     if (loading) {
