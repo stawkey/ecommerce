@@ -11,7 +11,9 @@ const Product = ({ product }) => {
                         <div className="text-xl">{product.name}</div>
                         <div className="flex justify-between w-full">
                             <div className="">
-                                {product.categories.map((category) => category.name).join(", ")}
+                                {Array.isArray(product.categories)
+                                    ? product.categories.map((category) => category.name).join(", ")
+                                    : ""}
                             </div>
                             <div className="">{product.price} pln</div>
                         </div>

@@ -1,0 +1,24 @@
+[
+    {
+        "_id": { "$oid": "67f7a111bbbc3ace82040392" },
+        "__v": 0,
+        "backgroundColor": "#d27630",
+        "createdAt": { "$date": "2025-04-10T10:44:33.730Z" },
+        "displayOrder": 0,
+        "product": { "$oid": "67f7a789b9bb0632940781a8" },
+        "subtitle": "Real fantastic",
+        "title": "Fantastic headphones",
+        "updatedAt": { "$date": "2025-04-10T11:13:36.649Z" }
+    },
+    {
+        "_id": { "$oid": "67fae83c983edb3b88d5935d" },
+        "__v": 0,
+        "backgroundColor": "#bd99ce",
+        "createdAt": { "$date": "2025-04-12T22:25:00.568Z" },
+        "displayOrder": 0,
+        "product": { "$oid": "67f7a789b9bb0632940781a8" },
+        "subtitle": "Some random text, no idea what to put here",
+        "title": "Definitely the best",
+        "updatedAt": { "$date": "2025-04-12T22:25:00.568Z" }
+    }
+]

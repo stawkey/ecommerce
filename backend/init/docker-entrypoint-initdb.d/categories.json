@@ -1,0 +1,34 @@
+[
+  {
+    "_id": {"$oid": "67f79a24bbbc3ace8204035d"},
+    "__v": 0,
+    "createdAt": {"$date": "2025-04-10T10:15:00.731Z"},
+    "image": "/images/headphones.jpeg",
+    "name": "Headphones",
+    "updatedAt": {"$date": "2025-04-10T10:40:13.074Z"}
+  },
+  {
+    "_id": {"$oid": "67f79a57bbbc3ace82040361"},
+    "__v": 0,
+    "createdAt": {"$date": "2025-04-10T10:15:51.365Z"},
+    "image": "/images/keyboard.jpg",
+    "name": "Keyboards",
+    "updatedAt": {"$date": "2025-04-10T10:17:44.218Z"}
+  },
+  {
+    "_id": {"$oid": "67f79a82bbbc3ace82040363"},
+    "__v": 0,
+    "createdAt": {"$date": "2025-04-10T10:16:34.952Z"},
+    "image": "/images/mouse.png",
+    "name": "Mice",
+    "updatedAt": {"$date": "2025-04-10T10:16:34.952Z"}
+  },
+  {
+    "_id": {"$oid": "67f79a9bbbbc3ace82040365"},
+    "__v": 0,
+    "createdAt": {"$date": "2025-04-10T10:16:59.455Z"},
+    "image": "/images/microphone.png",
+    "name": "Microphones",
+    "updatedAt": {"$date": "2025-04-10T10:16:59.455Z"}
+  }
+]
